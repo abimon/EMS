@@ -11,9 +11,9 @@ class CourseController extends Controller
 {
     public function index()
     {
-        $dep= Department::where('uni_id',Auth()->uni_id)->first();
-        $course = Course::where('dep_id',$dep->id)->get();
-        return view('department.course.index',compact('course'))->with('units','department');
+        $dep= Department::where('uni_id',Auth()->user()->uni_id)->first();
+        $courses = Course::where('dep_id',$dep->id)->get();
+        return view('courses.index',compact('courses'))->with('units','department');
     }
 
     public function create()
@@ -27,8 +27,9 @@ class CourseController extends Controller
      */
     public function store()
     {
+        $dep = Department::where('dep_name',Auth()->user()->department)->first();
         Course::create([
-            'dep_id'=>request()->id,
+            'dep_id'=>$dep->id,
             'course_name'=>request()->course_name,
         ]);
         return redirect()->back();
@@ -37,9 +38,10 @@ class CourseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Course $course)
+    public function show($title)
     {
-        return view('courses.show');
+        $course= Course::where('course_name',$title)->first();
+        return view('courses.show',compact('course'))->with('units');
     }
 
     /**

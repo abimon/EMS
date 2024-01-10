@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Department;
 use App\Models\University;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DepController extends Controller
@@ -25,12 +26,18 @@ class DepController extends Controller
 
     public function store()
     {
-        Department::create([
-            'uni_id'=>Auth()->user()->uni_id,
-            'dep_name'=>request()->dep_name,
-            'faculty'=>request()->faculty,
+        $dep = Department::where('dep_name',request()->dep_name)->first();
+        if(!$dep){
+            Department::create([
+                'uni_id'=>Auth()->user()->uni_id,
+                'dep_name'=>request()->dep_name,
+                'faculty'=>request()->faculty,
+            ]);
+        }
+        User::where('id',Auth()->user()->id)->update([
+            'department'=>request()->dep_name
         ]);
-        return redirect()->route('department.index');
+        return redirect()->route('course.index');
     }
     public function show($name)
     {
@@ -45,12 +52,18 @@ class DepController extends Controller
 
     public function update($id)
     {
-        Department::where('id',$id)->update([
-            'uni_id'=>Auth()->user()->uni_id,
-            'dep_name'=>request()->dep_name,
-            'faculty'=>request()->faculty,
+        $dep = Department::where('dep_name',request()->dep_name)->first();
+        if($dep){
+            Department::where('id',$id)->update([
+                'uni_id'=>Auth()->user()->uni_id,
+                'dep_name'=>request()->dep_name,
+                'faculty'=>request()->faculty,
+            ]);
+        }
+        User::where('id',Auth()->user()->id)->update([
+            'department'=>request()->dep_name
         ]);
-        return redirect()->route('department.index');
+        return redirect()->route('course.index');
     }
 
     public function destroy($id)

@@ -9,7 +9,7 @@ class Exam extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'unit_code',
+        'unit_id',
         'reg_no',
         'name',
         'attempt',
@@ -24,6 +24,7 @@ class Exam extends Model
         'Q3',
         'Q4',
         'Q5',
+        'marks'
     ];
     protected $guarded = ['id'];
     public function course(){

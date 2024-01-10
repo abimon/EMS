@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 <div class="container">
@@ -111,7 +111,7 @@
                         </div>
                     </div>
                 </td>
-                <td>{{($dep->created_at)->diffForHumans()}}</td>
+                <td>{{($dep->updated_at)->diffForHumans()}}</td>
             </tr>
             @endforeach
         </tbody>

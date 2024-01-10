@@ -3,7 +3,10 @@
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DepController;
 use App\Http\Controllers\ExamController;
+use App\Http\Controllers\UnitController;
+use App\Http\Controllers\UserController;
 use App\Models\Course;
+use App\Models\Department;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -19,13 +22,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
-Route::resources([
-    'exams'=>ExamController::class,
-    'department'=>DepController::class,
-    'course'=>CourseController::class
-    ]);
+Route::get('/home',function(){return redirect('/');} );
+Route::middleware('auth')->group(function(){
+    Route::resources([
+        'exams'=>ExamController::class,
+        'department'=>DepController::class,
+        'course'=>CourseController::class,
+        'user'=>UserController::class,
+        'unit'=>UnitController::class
+        ]);
+    Route::get('/dashboard',function(){return view('dashboard');} );
+    Route::get('/profile',function(){
+        $fac = Department::where('uni_id',Auth()->user()->uni_id)->first();
+        return view('profile',compact('fac'));
+    } );
+});
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

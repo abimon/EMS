@@ -68,19 +68,6 @@ trait RegistersUsers
         //
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 // ("Adventist University of Africa"),
 // ("Africa International University"),
 // ("Africa Nazarene University"),

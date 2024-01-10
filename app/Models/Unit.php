@@ -12,6 +12,8 @@ class Unit extends Model
         'course_id',
         'unit_title',
         'unit_code',
+        'sem',
+        'yearG'
     ];
     public function quiz(){
         return $this->belongsTo(Course::class, 'course_id', 'id');

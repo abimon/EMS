@@ -24,7 +24,8 @@ class User extends Authenticatable
         'isAllowed',
         'role',
         'password',
-        'uni_id'
+        'uni_id',
+        'department',
     ];
     protected $hidden = [
         'password',
@@ -35,6 +36,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function univ(){
+        return $this->belongsTo(University::class, 'uni_id', 'id');
+    }
 
 
 }

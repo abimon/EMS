@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\UnitImport;
 use App\Models\Unit;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
 class UnitController extends Controller
@@ -26,9 +28,31 @@ class UnitController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        // dd(request());
+        request()->validate([
+            'file' => 'required|mimes:xlsx,xls',
+        ]);
+        $file = request()->file('file');
+        if ($file) {
+            $data = Excel::toCollection(new UnitImport, $file);
+            // return $data;
+            foreach ($data[0] as $da) {
+                if ($da[0] != null) {
+                    Unit::create([
+                        'course_id'=>request()->id,
+                        'unit_code'=>$da[0],
+                        'unit_title'=>$da[1],
+                        'yearG'=>$da[2],
+                        'sem'=>$da[3],
+                    ]);
+                }
+            }
+        return back()->with('message', 'Results recorded successfully.');
+
+        }
+        return back()->with('message', 'Please Check your file, Something is wrong there.');
     }
 
     /**

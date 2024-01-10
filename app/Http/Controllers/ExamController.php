@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Imports\ExamImport;
 use App\Models\Exam;
+use App\Models\Unit;
+use App\Models\University;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -11,7 +13,9 @@ class ExamController extends Controller
 {
     public function index()
     {
-        return view('exams.index');
+        $items=Exam::orderBy('reg_no','asc')->get();
+        $units = Unit::all();
+        return view('exams.index',compact('items','units'));
     }
 
     public function create()
@@ -22,7 +26,7 @@ class ExamController extends Controller
     public function store()
     {
         request()->validate([
-            'file' => 'required|mimes:xlsx,xls,csv',
+            'file' => 'required|mimes:xlsx,xls',
         ]);
         $file = request()->file('file');
         if ($file) {
@@ -30,11 +34,7 @@ class ExamController extends Controller
             foreach ($data[0] as $da) {
                 if ((($da[1] != null)&&(is_numeric($da[1])))) {
                     Exam::create([
-                        'degree'=>request()->degree,
-                        'year'=>request()->year,
-                        'sem'=>request()->sem,
-                        'unit_code'=>request()->unit_code,
-                        'unit_title'=>request()->unit_title,
+                        'unit_id'=>request()->unit_id,
                         'reg_no' => $da[2],
                         'name' => $da[3],
                         'attempt' => $da[4],
@@ -49,6 +49,7 @@ class ExamController extends Controller
                         'Q3' => $da[16],
                         'Q4' => $da[17],
                         'Q5' => $da[18],
+                        'marks'=>0
                     ]);
                 }
             }
@@ -59,14 +60,16 @@ class ExamController extends Controller
     }
 
 
-    public function show(Exam $exam)
+    public function show($id)
     {
-        //
+        $items=Exam::where('unit_id',$id)->orderBy('reg_no','asc')->get();
+        $units = Unit::all();
+        return view('exams.index',compact('items','units'));
     }
 
     public function edit(Exam $exam)
     {
-        //
+        
     }
 
     public function update(Request $request, Exam $exam)
