@@ -18,7 +18,7 @@
   
 </head>
 
-<body class="bg-info">
+<body class="bg-primary">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
             <div class="container">

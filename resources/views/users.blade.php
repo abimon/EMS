@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.tables')
 @section('content')
-<table class="table table-info table-striped table-hover">
+<table class="table table-scroll table-info table-striped table-hover">
     <thead>
         <tr>
             <th>#</th>

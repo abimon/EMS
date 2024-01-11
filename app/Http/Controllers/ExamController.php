@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Imports\ExamImport;
 use App\Models\Exam;
+use App\Models\ExamTotal;
 use App\Models\Unit;
 use App\Models\University;
 use Illuminate\Http\Request;
@@ -31,6 +32,23 @@ class ExamController extends Controller
         $file = request()->file('file');
         if ($file) {
             $data = Excel::toCollection(new ExamImport, $file);
+            ExamTotal::create([
+                'unit_id'=>request()->unit_id,
+                'CAT1'=>$data[0][15][5],
+                'CAT2'=>$data[0][15][6],
+                'CAT3'=>$data[0][15][7],
+                'CAT_total'=>$data[0][15][8],
+                'ASN1'=>$data[0][15][9],
+                'ASN2'=>$data[0][15][10],
+                'ASN3'=>$data[0][15][11],
+                'ASN_total'=>$data[0][15][12],
+                'Q1'=>$data[0][15][14],
+                'Q2'=>$data[0][15][15],
+                'Q3'=>$data[0][15][16],
+                'Q4'=>$data[0][15][17],
+                'Q5'=>$data[0][15][18],
+                'exam_total'=>$data[0][15][19]
+            ]);
             foreach ($data[0] as $da) {
                 if ((($da[1] != null)&&(is_numeric($da[1])))) {
                     Exam::create([
@@ -64,7 +82,8 @@ class ExamController extends Controller
     {
         $items=Exam::where('unit_id',$id)->orderBy('reg_no','asc')->get();
         $units = Unit::all();
-        return view('exams.index',compact('items','units'));
+        $totals=ExamTotal::where('unit_id',$id)->first();
+        return view('exams.index',compact('items','units','totals'));
     }
 
     public function edit(Exam $exam)

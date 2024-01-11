@@ -146,7 +146,7 @@
 
     </aside><!-- End Sidebar-->
 
-    <main id="main" class="main " style="min-height: 400px;">
+    <main id="main" class="main" style="min-height: 400px;">
         <div class="pagetitle">
             <h1 style="text-transform: capitalize;">{{request()->path()}}</h1>
             <nav>

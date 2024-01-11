@@ -40,17 +40,17 @@ class UnitController extends Controller
             // return $data;
             foreach ($data[0] as $da) {
                 if ($da[0] != null) {
+
                     Unit::create([
-                        'course_id'=>request()->id,
-                        'unit_code'=>$da[0],
-                        'unit_title'=>$da[1],
-                        'yearG'=>$da[2],
-                        'sem'=>$da[3],
+                        'course_id' => request()->id,
+                        'unit_code' => $da[0],
+                        'unit_title' => $da[1],
+                        'yearG' => $da[2],
+                        'sem' => $da[3],
                     ]);
                 }
             }
-        return back()->with('message', 'Results recorded successfully.');
-
+            return back()->with('message', 'Results recorded successfully.');
         }
         return back()->with('message', 'Please Check your file, Something is wrong there.');
     }

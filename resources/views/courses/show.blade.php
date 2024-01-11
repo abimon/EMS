@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.tables')
 @section('content')
 <div class="container bg-white">
     @if(session('success'))
