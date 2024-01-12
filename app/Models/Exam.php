@@ -24,7 +24,10 @@ class Exam extends Model
         'Q3',
         'Q4',
         'Q5',
-        'marks'
+        'marks',
+        'CAT_t',
+        'ASN_t',
+        'Exam_t'
     ];
     protected $guarded = ['id'];
     public function course(){

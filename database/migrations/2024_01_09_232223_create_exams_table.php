@@ -19,14 +19,17 @@ return new class extends Migration
             $table->integer('CAT1')->nullable();
             $table->integer('CAT2')->nullable();
             $table->integer('CAT3')->nullable();
+            $table->string('CAT_t');
             $table->integer('ASN1')->nullable();
             $table->integer('ASN2')->nullable();
             $table->integer('ASN3')->nullable();
+            $table->string('ASN_t');
             $table->integer('Q1')->nullable();
             $table->integer('Q2')->nullable();
             $table->integer('Q3')->nullable();
             $table->integer('Q4')->nullable();
             $table->integer('Q5')->nullable();
+            $table->string('Exam_t');
             $table->integer('marks')->nullable();
             $table->timestamps();
             $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');

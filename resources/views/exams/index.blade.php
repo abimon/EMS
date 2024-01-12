@@ -92,160 +92,27 @@
             </tr>
             @foreach($items as $key=>$item)
             <tr>
-                <?php
-                    if ($item->CAT3 != null) {
-                        if ($item->CAT2 != null) {
-                            if ($item->CAT1 != null) {
-                                $c_total = ((($item->CAT1) / ($totals->CAT1)) + (($item->CAT2) / ($totals->CAT2))+(($item->CAT3) / ($totals->CAT3))) / 3;
-                            } else {
-                                if ($items->where('CAT1', null)->count() == $items->count()) {
-                                    $c_total = ((($item->CAT2) / ($totals->CAT2))+(($item->CAT3) / ($totals->CAT3))) / 2;
-                                } else {
-                                    $c_total = ((($item->CAT2) / ($totals->CAT2))+(($item->CAT3) / ($totals->CAT3))) / 3;
-                                }
-                            }
-                        } else {
-                            if ($items->where('CAT2', null)->count() == $items->count()) {
-                                $c_total = ($item->CAT3) / ($totals->CAT3);
-                            } else {
-                                $c_total =(($item->CAT3) / ($totals->CAT3))/2;
-                            }
-                        }
-                    }
-                    else{
-                        if($items->where('CAT3', null)->count() == $items->count()){
-                            if ($item->CAT2 != null) {
-                                if ($item->CAT1 != null) {
-                                    $c_total = ((($item->CAT1) / ($totals->CAT1)) + (($item->CAT2) / ($totals->CAT2))) / 2;
-                                } else {
-                                    if ($items->where('CAT1', null)->count() == $items->count()) {
-                                        $c_total = ((($item->CAT2) / ($totals->CAT2))+(($item->CAT3) / ($totals->CAT3))) / 2;
-                                    } else {
-                                        $c_total = ((($item->CAT2) / ($totals->CAT2))+(($item->CAT3) / ($totals->CAT3))) / 3;
-                                    }
-                                }
-                            } else {
-                                if ($items->where('CAT2', null)->count() == $items->count()) {
-                                    if($item->CAT1 != null){
-                                        $c_total = ($item->CAT1) / ($totals->CAT1);
-                                    }
-                                    else{
-                                        $c_total=0;
-                                    }
-                                } else {
-                                    $c_total =(($item->CAT3) / ($totals->CAT3))/2;
-                                }
-                            }
-                        }
-                        else{
-                            if ($item->CAT2 != null) {
-                                if ($item->CAT1 != null) {
-                                    $c_total = ((($item->CAT1) / ($totals->CAT1)) + (($item->CAT2) / ($totals->CAT2))+(($item->CAT3) / ($totals->CAT3))) / 3;
-                                } else {
-                                    if ($items->where('CAT1', null)->count() == $items->count()) {
-                                        $c_total = ((($item->CAT2) / ($totals->CAT2))+(($item->CAT3) / ($totals->CAT3))) / 2;
-                                    } else {
-                                        $c_total = ((($item->CAT2) / ($totals->CAT2))+(($item->CAT3) / ($totals->CAT3))) / 3;
-                                    }
-                                }
-                            } else {
-                                if ($items->where('CAT2', null)->count() == $items->count()) {
-                                    $c_total = ($item->CAT3) / ($totals->CAT3);
-                                } else {
-                                    $c_total =(($item->CAT3) / ($totals->CAT3))/2;
-                                }
-                            }
-                        }
-                    }
-
-                    if ($item->ASN3 != null) {
-                        if ($item->ASN2 != null) {
-                            if ($item->ASN1 != null) {
-                                $a_total = ((($item->ASN1) / ($totals->ASN1)) + (($item->ASN2) / ($totals->ASN2))+(($item->ASN3) / ($totals->ASN3))) / 3;
-                            } else {
-                                if ($items->where('ASN1', null)->count() == $items->count()) {
-                                    $a_total = ((($item->ASN2) / ($totals->ASN2))+(($item->ASN3) / ($totals->ASN3))) / 2;
-                                } else {
-                                    $a_total = ((($item->ASN2) / ($totals->ASN2))+(($item->ASN3) / ($totals->ASN3))) / 3;
-                                }
-                            }
-                        } else {
-                            if ($items->where('ASN2', null)->count() == $items->count()) {
-                                $a_total = ($item->ASN3) / ($totals->ASN3);
-                            } else {
-                                $a_total =(($item->ASN3) / ($totals->ASN3))/2;
-                            }
-                        }
-                    }
-                    else{
-                        if($items->where('ASN3', null)->count() == $items->count()){
-                            if ($item->ASN2 != null) {
-                                if ($item->ASN1 != null) {
-                                    $a_total = ((($item->ASN1) / ($totals->ASN1)) + (($item->ASN2) / ($totals->ASN2))) / 2;
-                                } else {
-                                    if ($items->where('ASN1', null)->count() == $items->count()) {
-                                        $a_total = ((($item->ASN2) / ($totals->ASN2))+(($item->ASN3) / ($totals->ASN3))) / 2;
-                                    } else {
-                                        $a_total = ((($item->ASN2) / ($totals->ASN2))+(($item->ASN3) / ($totals->ASN3))) / 3;
-                                    }
-                                }
-                            } else {
-                                if ($items->where('ASN2', null)->count() == $items->count()) {
-                                    if($item->ASN1 != null){
-                                        $a_total = ($item->ASN1) / ($totals->ASN1);
-                                    }
-                                    else{
-                                        $a_total=0;
-                                    }
-                                } else {
-                                    $a_total =(($item->ASN3) / ($totals->ASN3))/2;
-                                }
-                            }
-                        }
-                        else{
-                            if ($item->ASN2 != null) {
-                                if ($item->ASN1 != null) {
-                                    $a_total = ((($item->ASN1) / ($totals->ASN1)) + (($item->ASN2) / ($totals->ASN2))+(($item->ASN3) / ($totals->ASN3))) / 3;
-                                } else {
-                                    if ($items->where('ASN1', null)->count() == $items->count()) {
-                                        $a_total = ((($item->ASN2) / ($totals->ASN2))+(($item->ASN3) / ($totals->ASN3))) / 2;
-                                    } else {
-                                        $a_total = ((($item->ASN2) / ($totals->ASN2))+(($item->ASN3) / ($totals->ASN3))) / 3;
-                                    }
-                                }
-                            } else {
-                                if ($items->where('ASN2', null)->count() == $items->count()) {
-                                    $a_total = ($item->ASN3) / ($totals->ASN3);
-                                } else {
-                                    $a_total =(($item->ASN3) / ($totals->ASN3))/2;
-                                }
-                            }
-                        }
-                    }
-                    $c=round($c_total*($totals->CAT_total),1);
-                    $a=round($a_total*($totals->ASN_total),1);
-                    $m=($item->Q1)+($item->Q2)+($item->Q3)+($item->Q4)+($item->Q5);
-                    $g = round($m+$c+$a);
-                ?>
+                
                 <td>{{$key+1}}</td>
                 <td>{{$item->reg_no}} <br> <small>{{$item->name}}</small></td>
                 <td>{{$item->attempt}}</td>
                 <td class="{{$item->CAT1==''?'bg-dark':''}}">{{$item->CAT1}}</td>
                 <td class="{{$item->CAT2==''?'bg-dark':''}}">{{$item->CAT2}}</td>
                 <td class="{{$item->CAT3==''?'bg-dark':''}}">{{$item->CAT3}}</td>
-                <td>{{$c}}</td>
+                <td>{{$item->CAT_t}}</td>
                 <td class="{{$item->ASN1==''?'bg-dark':''}}">{{$item->ASN1}}</td>
                 <td class="{{$item->ASN2==''?'bg-dark':''}}">{{$item->ASN2}}</td>
                 <td class="{{$item->ASN3==''?'bg-dark':''}}">{{$item->ASN3}}</td>
-                <td>{{$a}}</td>
-                <td>{{$c+$a}}</td>
+                <td>{{$item->ASN_t}}</td>
+                <td>{{($item->CAT_t)+($item->ASN_t)}}</td>
                 <td class="{{$item->Q1==''?'bg-dark':''}}">{{$item->Q1}}</td>
                 <td class="{{$item->Q2==''?'bg-dark':''}}">{{$item->Q2}}</td>
                 <td class="{{$item->Q3==''?'bg-dark':''}}">{{$item->Q3}}</td>
                 <td class="{{$item->Q4==''?'bg-dark':''}}">{{$item->Q4}}</td>
                 <td class="{{$item->Q5==''?'bg-dark':''}}">{{$item->Q5}}</td>
-                <td>{{$m}}</td>
-                <td>{{$g}}</td>
+                <td>{{$item->Exam_t}}</td>
+                <td>{{$item->marks}}</td>
+                <?php $g = $item->marks;?>
                 <td>@if($g>=70)
                     A
                     @elseif($g>=60)
