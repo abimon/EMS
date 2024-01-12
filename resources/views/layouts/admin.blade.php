@@ -105,7 +105,7 @@
 
     </header><!-- End Header -->
 
-    <!-- ======= Sidebar ======= -->
+    <!-- ======= Sidebar ======= 
     <aside id="sidebar" class="sidebar">
 
         <ul class="sidebar-nav" id="sidebar-nav">
@@ -116,7 +116,6 @@
                     <span>Dashboard</span>
                 </a>
             </li>
-            <!-- End Dashboard Nav -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{route('course.index')}}">
                     <i class="bi bi-person-vcard-fill"></i>
@@ -141,10 +140,9 @@
                     <span>Universities</span>
                 </a>
             </li>
-            <!-- End Profile Page Nav -->
         </ul>
 
-    </aside><!-- End Sidebar-->
+    </aside>End Sidebar-->
 
     <main id="main" class="main" style="min-height: 400px;">
         <div class="pagetitle">
