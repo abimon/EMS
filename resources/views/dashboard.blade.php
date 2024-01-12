@@ -22,8 +22,8 @@
             <div class="col-md-4 col-6 p-2">
                 <a href="{{route('course.index')}}" style="text-decoration: none;" class="link">
                     <div class="card p-1 text-center">
-                    <i class="bi bi-person-vcard-fill m-3"></i>
-                        <p class="text-center">Exams</p>
+                    <h1 class="bi bi-person-vcard-fill m-3"></h1>
+                        <p class="text-center">Courses</p>
                     </div>
                 </a>
             </div>
