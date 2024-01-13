@@ -1,29 +1,36 @@
 @extends('layouts.tables')
 @section('content')
 <div class="card col-md-8 col-11">
-    <div class="card-header">{{ __('Dashboard') }}</div>
+    <div class="card-header d-flex justify-content-between">
+        {{ __('Dashboard') }}
+        <div>
+            <i class="fa-solid fa-clock text-secondary"></i> {{(date_diff(date_create(date_format(Auth()->user()->updated_at,'Y-m-d')),date_create(date('Y-m-d'))))->format('%a/30 days')}}
+        </div>
+    </div>
 
     <div class="card-body">
-        <div class="d-flex justify-content-between">
-            <div>
-                @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
-                </div>
-                @endif
-                {{ __('You are logged in!') }}
+
+        <div>
+            @if (session('status'))
+            <div class="alert alert-success" role="alert">
+                {{ session('status') }}
             </div>
-            <div>
-                <i class="fa-solid fa-clock text-secondary"></i> {{(date_diff(date_create(date_format(Auth()->user()->updated_at,'Y-m-d')),date_create(date('Y-m-d'))))->format('%a day(s)')}} 
-                
-            </div>
+            @endif
         </div>
         <div class="row d-flex justify-content-between">
-            <div class="col-md-4 col-6 p-2">
+            <div class="col-md-5 col-6 p-2">
                 <a href="{{route('course.index')}}" style="text-decoration: none;" class="link">
                     <div class="card p-1 text-center">
-                    <h1 class="bi bi-person-vcard-fill m-3"></h1>
+                        <h1 class="bi bi-person-vcard-fill m-3"></h1>
                         <p class="text-center">Courses</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-5 col-6 p-2">
+                <a href="" style="text-decoration: none;" class="link">
+                    <div class="card p-1 text-center">
+                        <h1 class="bi bi-mortarboard m-3"></h1>
+                        <p class="text-center">Graduation Lists</p>
                     </div>
                 </a>
             </div>
