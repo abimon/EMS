@@ -14,7 +14,7 @@
                 {{ __('You are logged in!') }}
             </div>
             <div>
-                <i class="fa-solid fa-envelope text-info"></i> {{(date_diff(date_create(date_format(Auth()->user()->updated_at,'Y-m-d')),date_create(date('Y-m-d'))))->format('%a day(s)')}} 
+                <i class="fa-solid fa-clock text-secondary"></i> {{(date_diff(date_create(date_format(Auth()->user()->updated_at,'Y-m-d')),date_create(date('Y-m-d'))))->format('%a day(s)')}} 
                 
             </div>
         </div>
