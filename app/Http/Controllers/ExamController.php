@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Imports\ExamImport;
 use App\Models\Exam;
 use App\Models\ExamTotal;
+use App\Models\Pass;
+use App\Models\Special;
+use App\Models\Student;
+use App\Models\Sup;
 use App\Models\Unit;
 use App\Models\University;
 use Illuminate\Http\Request;
@@ -32,7 +36,7 @@ class ExamController extends Controller
         $file = request()->file('file');
         if ($file) {
             $data = Excel::toCollection(new ExamImport, $file);
-            ExamTotal::create([
+            $t=ExamTotal::create([
                 'unit_id'=>request()->unit_id,
                 'CAT1'=>$data[0][15][5],
                 'CAT2'=>$data[0][15][6],
@@ -210,10 +214,17 @@ class ExamController extends Controller
                     $a=round($a_total*($ASN_total),1);
                     $m=($da[14])+($da[15])+($da[16])+($da[17])+($da[18]);
                     $g = round($m+$c+$a);
-                    Exam::create([
+                    $stu = Student::where('student_name',$da[3])->where('reg_no',$da[2])->first();
+                    if(!$stu){
+                        $stu=Student::create([
+                            'student_name'=>$da[3],
+                            'reg_no'=>$da[2]
+                        ]);
+                    }
+                    $exam=Exam::create([
                         'unit_id'=>request()->unit_id,
-                        'reg_no' => $da[2],
-                        'name' => $da[3],
+                        'student_id' => $stu->id,
+                        't_id' => $t->id,
                         'attempt' => $da[4],
                         'CAT1' => $da[5],
                         'CAT2' => $da[6],
@@ -231,9 +242,25 @@ class ExamController extends Controller
                         'Exam_t'=>$m,
                         'marks'=>$g
                     ]);
-                    
+                    if($g>40){
+                        Pass::create([
+                            'exam_id'=>$exam->id,
+                            'unit_code'=>$exam->unit_id
+                        ]);
+                    }
+                    elseif($g>0){
+                        Sup::create([
+                            'exam_id'=>$exam->id,
+                            'unit_code'=>$exam->unit_id
+                        ]);
+                    }
+                    else{
+                        Special::create([
+                            'exam_id'=>$exam->id,
+                            'unit_code'=>$exam->unit_id
+                        ]);
+                    }
                 }
-                
             }
         return back()->with('message', 'Results recorded successfully.');
 
@@ -244,15 +271,21 @@ class ExamController extends Controller
 
     public function show($id)
     {
-        $items=Exam::where('unit_id',$id)->orderBy('reg_no','asc')->get();
-        $units = Unit::all();
+        $items=Exam::where('unit_id',$id)->orderBy('reg_no','asc')->join('students','student_id','=','students.id')->select('exams.*','students.student_name','students.reg_no')->get();
+        $unit = Unit::where('id',$id)->first();
+        $pass = Pass::where('unit_code',$id)->get();
+        $specs = Special::where('unit_code',$id)->get();
+        $sups = Sup::where('unit_code',$id)->get();
         $totals=ExamTotal::where('unit_id',$id)->first();
-        return view('exams.index',compact('items','units','totals'));
+        return view('exams.index',compact('items','unit','totals','pass','specs','sups'));
     }
 
-    public function edit(Exam $exam)
+    public function edit($id,$year,$sem)
     {
-        
+        $students=Student::all();
+        //Separate students into year groups considering students retaking exams
+        $units=Unit::where([['course_id',$id],['yearG',$year],['sem',$sem]])->get();
+        return view('examcms',compact('students','units'))->with('exams');
     }
 
     public function update(Request $request, Exam $exam)

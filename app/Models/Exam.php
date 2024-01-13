@@ -10,8 +10,8 @@ class Exam extends Model
     use HasFactory;
     protected $fillable = [
         'unit_id',
-        'reg_no',
-        'name',
+        'student_id',
+        't_id',
         'attempt',
         'CAT1',
         'CAT2',
@@ -32,5 +32,14 @@ class Exam extends Model
     protected $guarded = ['id'];
     public function course(){
         return $this->belongsTo(Course::class, 'dep_id', 'id');
+    }
+    public function sups(){
+        return $this->hasMany(Sup::class, 'exam_id','id');
+    }
+    public function specials(){
+        return $this->hasMany(Special::class, 'exam_id','id');
+    }
+    public function pass(){
+        return $this->hasMany(Pass::class, 'exam_id','id');
     }
 }

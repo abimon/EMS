@@ -15,7 +15,11 @@ class Unit extends Model
         'sem',
         'yearG'
     ];
-    public function quiz(){
+    public function course(){
         return $this->belongsTo(Course::class, 'course_id', 'id');
+    }
+    public function exams()
+    {
+        return $this->hasMany(Exam::class, 'unit_id', 'id');
     }
 }

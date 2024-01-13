@@ -50,6 +50,11 @@
         @if($course->units->where('yearG',$i)->count()>0)
             <div id="flush-collapse{{$i}}" class="accordion-collapse collapse {{$i==1?'show':''}}" data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
+                    <div class="d-flex justify-content-between col-md-8">
+                        <a href="/cms/{{$course->id}}/{{$i}}/1"><button class="btn btn-primary">SEM 1 SCORE LIST</button></a>
+                        <a href="/cms/{{$course->id}}/{{$i}}/2"><button class="btn btn-primary">SEM 2 SCORE LIST</button></a>
+                        <a href="/cms/{{$course->id}}/{{$i}}/3"><button class="btn btn-primary">SEM 3 SCORE LIST</button></a>
+                    </div>
                     <ol class="ms-0">
                         <hr>
                         @foreach($course->units->where('yearG',$i) as $unit)
@@ -79,7 +84,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Understood</button>
+                                                <button type="submit" class="btn btn-primary">Upload</button>
                                             </div>
                                         </form>
                                     </div>

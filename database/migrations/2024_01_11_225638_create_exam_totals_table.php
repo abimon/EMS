@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('exam_totals', function (Blueprint $table) {
             $table->id();
-            $table->string('unit_id');
+            $table->integer('unit_id');
             $table->integer('CAT1');
             $table->integer('CAT2');
             $table->integer('CAT3');
