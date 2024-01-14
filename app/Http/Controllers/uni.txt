@@ -1,62 +1,62 @@
-Adventist University of Africa
-Africa International UniversityAfrica Nazarene University
-Amref International University
-Chuka University
-Daystar University
-Dedan Kimathi University of Technology
-Egerton University
-Garissa University
-Great Lakes University of Kisumu
-Gretsa University
-International Leadership University, Kenya
-Islamic University of Kenya
-Jaramogi Oginga Odinga University of Science and Technology
-Jomo Kenyatta University of Agriculture and Technology
-Kabarak University
-KAG East University
-Karatina University
-KCA University
-Kenya Highlands University
-Kenya Methodist University
-Kenyatta University
-Kibabii University
-Kirinyaga University
-Kiriri Women's University of Science and Technology
-Kisii University
-Laikipia University
-Lukenya University
-Maasai Mara University
-Machakos University	Machakos
-Management University of Africa
-Maseno University
-Masinde Muliro University of Science and Technology
-Meru University of Science and Technology
-Moi University
-Mount Kenya University
-Multimedia University of Kenya	Nairobi
-Murang'a University of Technology
-Pan Africa Christian University
-Pioneer International University
-Pwani University
-Riara University
-Rongo University
-Scott Christian University
-South Eastern Kenya University
-St. Paul's University
-Strathmore University
-Taita Taveta University
-Technical University of Kenya
-Technical University of Mombasa	Mombasa
-The Catholic University of Eastern Africa
-The Co-operative University of Kenya
-The East African University
-The Presbyterian University of East Africa
-Umma University
-United States International University Africa
-University of Eastern Africa, Baraton
-University of Eldoret
-University of Embu
-University of Kabianga
-University of Nairobi
-Uzima University
-Zetech University"
+(now(),now(),"Adventist University of Africa"),
+(now(),now(),"Africa International UniversityAfrica Nazarene University"),
+(now(),now(),"Amref International University"),
+(now(),now(),"Chuka University"),
+(now(),now(),"Daystar University"),
+(now(),now(),"Dedan Kimathi University of Technology"),
+(now(),now(),"Egerton University"),
+(now(),now(),"Garissa University"),
+(now(),now(),"Great Lakes University of Kisumu"),
+(now(),now(),"Gretsa University"),
+(now(),now(),"International Leadership University, Kenya"),
+(now(),now(),"Islamic University of Kenya"),
+(now(),now(),"Jaramogi Oginga Odinga University of Science and Technology"),
+(now(),now(),"Jomo Kenyatta University of Agriculture and Technology"),
+(now(),now(),"Kabarak University"),
+(now(),now(),"KAG East University"),
+(now(),now(),"Karatina University"),
+(now(),now(),"KCA University"),
+(now(),now(),"Kenya Highlands University"),
+(now(),now(),"Kenya Methodist University"),
+(now(),now(),"Kenyatta University"),
+(now(),now(),"Kibabii University"),
+(now(),now(),"Kirinyaga University"),
+(now(),now(),"Kiriri Women's University of Science and Technology"),
+(now(),now(),"Kisii University"),
+(now(),now(),"Laikipia University"),
+(now(),now(),"Lukenya University"),
+(now(),now(),"Maasai Mara University"),
+(now(),now(),"Machakos University	Machakos"),
+(now(),now(),"Management University of Africa"),
+(now(),now(),"Maseno University"),
+(now(),now(),"Masinde Muliro University of Science and Technology"),
+(now(),now(),"Meru University of Science and Technology"),
+(now(),now(),"Moi University"),
+(now(),now(),"Mount Kenya University"),
+(now(),now(),"Multimedia University of Kenya	Nairobi"),
+(now(),now(),"Murang'a University of Technology"),
+(now(),now(),"Pan Africa Christian University"),
+(now(),now(),"Pioneer International University"),
+(now(),now(),"Pwani University"),
+(now(),now(),"Riara University"),
+(now(),now(),"Rongo University"),
+(now(),now(),"Scott Christian University"),
+(now(),now(),"South Eastern Kenya University"),
+(now(),now(),"St. Paul's University"),
+(now(),now(),"Strathmore University"),
+(now(),now(),"Taita Taveta University"),
+(now(),now(),"Technical University of Kenya"),
+(now(),now(),"Technical University of Mombasa	Mombasa"),
+(now(),now(),"The Catholic University of Eastern Africa"),
+(now(),now(),"The Co-operative University of Kenya"),
+(now(),now(),"The East African University"),
+(now(),now(),"The Presbyterian University of East Africa"),
+(now(),now(),"Umma University"),
+(now(),now(),"United States International University Africa"),
+(now(),now(),"University of Eastern Africa, Baraton"),
+(now(),now(),"University of Eldoret"),
+(now(),now(),"University of Embu"),
+(now(),now(),"University of Kabianga"),
+(now(),now(),"University of Nairobi"),
+(now(),now(),"Uzima University"),
+(now(),now(),"Zetech University")

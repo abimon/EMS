@@ -8,6 +8,7 @@ use App\Models\Exam;
 use App\Models\ExamTotal;
 use App\Models\Pass;
 use App\Models\Special;
+use App\Models\Stata;
 use App\Models\Student;
 use App\Models\Sup;
 use App\Models\Unit;
@@ -38,229 +39,78 @@ class ExamController extends Controller
         $file = request()->file('file');
         if ($file) {
             $data = Excel::toCollection(new ExamImport, $file);
-            $t=ExamTotal::create([
-                'unit_id'=>request()->unit_id,
-                'CAT1'=>$data[0][15][5],
-                'CAT2'=>$data[0][15][6],
-                'CAT3'=>$data[0][15][7],
-                'CAT_total'=>$data[0][15][8],
-                'ASN1'=>$data[0][15][9],
-                'ASN2'=>$data[0][15][10],
-                'ASN3'=>$data[0][15][11],
-                'ASN_total'=>$data[0][15][12],
-                'Q1'=>$data[0][15][14],
-                'Q2'=>$data[0][15][15],
-                'Q3'=>$data[0][15][16],
-                'Q4'=>$data[0][15][17],
-                'Q5'=>$data[0][15][18],
-                'exam_total'=>$data[0][15][19]
-            ]);
-            $count1=0;
-            $count2=0;
-            $count3=0;
-            $count4=0;
-            $count5=0;
-            $count6=0;
-            $students=0;
-            $CAT1_t=$data[0][15][5];
-            $CAT2_t=$data[0][15][6];
-            $CAT3_t=$data[0][15][7];
-            $CAT_total=$data[0][15][8];
-            $ASN1_t=$data[0][15][9];
-            $ASN2_t=$data[0][15][10];
-            $ASN3_t=$data[0][15][11];
-            $ASN_total=$data[0][15][12];
+            
             foreach ($data[0] as $da) {
-                if(($da[1] != null)&&(is_numeric($da[1]))){
-                    $students+=1;
-                    if($da[5]==null){$count1+=1;}
-                    if($da[6]==null){$count2+=1;}
-                    if($da[7]==null){$count3+=1;}
-                    if($da[9]==null){$count4+=1;}
-                    if($da[10]==null){$count5+=1;}
-                    if($da[11]==null){$count6+=1;}
-                }
-            }
-            foreach ($data[0] as $da) {
-                if ((($da[1] != null)&&(is_numeric($da[1])))) {
-                    if ($da[7] != null) {
-                        if ($da[6] != null) {
-                            if ($da[5] != null) {
-                                $c_total = ((($da[5]) / ($CAT1_t)) + (($da[6]) / ($CAT2_t))+(($da[7]) / ($CAT3_t))) / 3;
-                            } else {
-                                if ($count1 == $students) {
-                                    $c_total = ((($da[6]) / ($CAT2_t))+(($da[7]) / ($CAT3_t))) / 2;
-                                } else {
-                                    $c_total = ((($da[6]) / ($CAT2_t))+(($da[7]) / ($CAT3_t))) / 3;
-                                }
-                            }
-                        } else {
-                            if ($count2 == $students) {
-                                $c_total = ($da[7]) / ($CAT3_t);
-                            } else {
-                                $c_total =(($da[7]) / ($CAT3_t))/2;
-                            }
-                        }
-                    }
-                    else{
-                        if($count3 == $students){
-                            if ($da[6] != null) {
-                                if ($da[5] != null) {
-                                    $c_total = ((($da[5]) / ($CAT1_t)) + (($da[6]) / ($CAT2_t))) / 2;
-                                } else {
-                                    if ($count1 == $students) {
-                                        $c_total = ((($da[6]) / ($CAT2_t))+(($da[7]) / ($CAT3_t))) / 2;
-                                    } else {
-                                        $c_total = ((($da[6]) / ($CAT2_t))+(($da[7]) / ($CAT3_t))) / 3;
-                                    }
-                                }
-                            } else {
-                                if ($count2 == $students) {
-                                    if($da[5] != null){
-                                        $c_total = ($da[5]) / ($CAT1_t);
-                                    }
-                                    else{
-                                        $c_total=0;
-                                    }
-                                } else {
-                                    $c_total =(($da[7]) / ($CAT3_t))/2;
-                                }
-                            }
-                        }
-                        else{
-                            if ($da[6] != null) {
-                                if ($da[5] != null) {
-                                    $c_total = ((($da[5]) / ($CAT1_t)) + (($da[6]) / ($CAT2_t))+(($da[7]) / ($CAT3_t))) / 3;
-                                } else {
-                                    if ($count1 == $students) {
-                                        $c_total = ((($da[6]) / ($CAT2_t))+(($da[7]) / ($CAT3_t))) / 2;
-                                    } else {
-                                        $c_total = ((($da[6]) / ($CAT2_t))+(($da[7]) / ($CAT3_t))) / 3;
-                                    }
-                                }
-                            } else {
-                                if ($count2 == $students) {
-                                    $c_total = ($da[7]) / ($CAT3_t);
-                                } else {
-                                    $c_total =(($da[7]) / ($CAT3_t))/2;
-                                }
-                            }
-                        }
-                    }
-
-                    if ($da[11] != null) {
-                        if ($da[10] != null) {
-                            if ($da[9] != null) {
-                                $a_total = ((($da[9]) / ($ASN1_t)) + (($da[10]) / ($ASN2_t))+(($da[11]) / ($ASN3_t))) / 3;
-                            } else {
-                                if ($count4 == $students) {
-                                    $a_total = ((($da[10]) / ($ASN2_t))+(($da[11]) / ($ASN3_t))) / 2;
-                                } else {
-                                    $a_total = ((($da[10]) / ($ASN2_t))+(($da[11]) / ($ASN3_t))) / 3;
-                                }
-                            }
-                        } else {
-                            if ($count5 == $students) {
-                                $a_total = ($da[11]) / ($ASN3_t);
-                            } else {
-                                $a_total =(($da[11]) / ($ASN3_t))/2;
-                            }
-                        }
-                    }
-                    else{
-                        if($count6 == $students){
-                            if ($da[10] != null) {
-                                if ($da[9] != null) {
-                                    $a_total = ((($da[9]) / ($ASN1_t)) + (($da[10]) / ($ASN2_t))) / 2;
-                                } else {
-                                    if ($count4 == $students) {
-                                        $a_total = ((($da[10]) / ($ASN2_t))+(($da[11]) / ($ASN3_t))) / 2;
-                                    } else {
-                                        $a_total = ((($da[10]) / ($ASN2_t))+(($da[11]) / ($ASN3_t))) / 3;
-                                    }
-                                }
-                            } else {
-                                if ($count5 == $students) {
-                                    if($da[9] != null){
-                                        $a_total = ($da[9]) / ($ASN1_t);
-                                    }
-                                    else{
-                                        $a_total=0;
-                                    }
-                                } else {
-                                    $a_total =(($da[11]) / ($ASN3_t))/2;
-                                }
-                            }
-                        }
-                        else{
-                            if ($da[10] != null) {
-                                if ($da[9] != null) {
-                                    $a_total = ((($da[9]) / ($ASN1_t)) + (($da[10]) / ($ASN2_t))+(($da[11]) / ($ASN3_t))) / 3;
-                                } else {
-                                    if ($count4 == $students) {
-                                        $a_total = ((($da[10]) / ($ASN2_t))+(($da[11]) / ($ASN3_t))) / 2;
-                                    } else {
-                                        $a_total = ((($da[10]) / ($ASN2_t))+(($da[11]) / ($ASN3_t))) / 3;
-                                    }
-                                }
-                            } else {
-                                if ($count5 == $students) {
-                                    $a_total = ($da[11]) / ($ASN3_t);
-                                } else {
-                                    $a_total =(($da[11]) / ($ASN3_t))/2;
-                                }
-                            }
-                        }
-                    }
-                    $c=round($c_total*($CAT_total),1);
-                    $a=round($a_total*($ASN_total),1);
-                    $m=($da[14])+($da[15])+($da[16])+($da[17])+($da[18]);
-                    $g = round($m+$c+$a);
-                    $stu = Student::where('student_name',$da[3])->where('reg_no',$da[2])->first();
-                    if(!$stu){
-                        $stu=Student::create([
-                            'student_name'=>$da[3],
-                            'reg_no'=>$da[2]
-                        ]);
-                    }
+                if ($da[0] != null) {
+                    // student_reg_no|attempt|CAT_and_Assignment_score|Exam_score
+                    $stude=Student::where('reg_no',$da[0])->orWhere('student_name',$da[1])->first();
+                    // return $stude;
+                    $id=$stude->id;
+                    $unit = Unit::findOrFail(request()->unit_id);
+                    
                     $exam=Exam::create([
                         'unit_id'=>request()->unit_id,
-                        'student_id' => $stu->id,
-                        't_id' => $t->id,
-                        'attempt' => $da[4],
-                        'CAT1' => $da[5],
-                        'CAT2' => $da[6],
-                        'CAT3' => $da[7],
-                        'CAT_t'=>$c,
-                        'ASN1' => $da[9],
-                        'ASN2' => $da[10],
-                        'ASN3' => $da[11],
-                        'ASN_t'=>$a,
-                        'Q1' => $da[14],
-                        'Q2' => $da[15],
-                        'Q3' => $da[16],
-                        'Q4' => $da[17],
-                        'Q5' => $da[18],
-                        'Exam_t'=>$m,
-                        'marks'=>$g
+                        'student_id'=>$id,
+                        'attempt'=>$da[2],
+                        'CAT'=>$da[3],
+                        'Exam'=>$da[4]
                     ]);
-                    if($g>40){
-                        Pass::create([
-                            'exam_id'=>$exam->id,
-                            'unit_code'=>$exam->unit_id
-                        ]);
-                    }
-                    elseif($g>0){
-                        Sup::create([
-                            'exam_id'=>$exam->id,
-                            'unit_code'=>$exam->unit_id
-                        ]);
+                    
+                    if($da[3]==null||$da[4]==null){
+
+                        if($da[3]==null){
+                            Sup::create([
+                                'exam_id'=>$exam->id,
+                                'unit_code'=>$exam->unit_id
+                            ]);
+                            Stata::create([
+                                'student_id'=>$id,
+                                'comment'=>'CAT Marks missing for the unit '.($unit->unit_code).' '.($unit->unit_title),
+                                'author_id'=>Auth()->user()->id
+                            ]);
+                        }
+                        if($da[4]==null){
+                            Sup::create([
+                                'exam_id'=>$exam->id,
+                                'unit_code'=>$exam->unit_id
+                            ]);
+                            Stata::create([
+                                'student_id'=>$id,
+                                'comment'=>'Exam Marks missing for the unit '.($unit->unit_code).' '.($unit->unit_title),
+                                'author_id'=>Auth()->user()->id
+                            ]);
+                        }
                     }
                     else{
-                        Special::create([
-                            'exam_id'=>$exam->id,
-                            'unit_code'=>$exam->unit_id
-                        ]);
+                        $g=$da[3]+$da[4];
+                        if($g>40){
+                            Pass::create([
+                                'exam_id'=>$exam->id,
+                                'unit_code'=>$exam->unit_id
+                            ]);
+                        }
+                        elseif($g>0){
+                            Sup::create([
+                                'exam_id'=>$exam->id,
+                                'unit_code'=>$exam->unit_id
+                            ]);
+                            Stata::create([
+                                'student_id'=>$id,
+                                'comment'=>'Supplimentary exam on the unit '.($unit->unit_code).' '.($unit->unit_title),
+                                'author_id'=>Auth()->user()->id
+                            ]);
+                        }
+                        else{
+                            Special::create([
+                                'exam_id'=>$exam->id,
+                                'unit_code'=>$exam->unit_id
+                            ]);
+                            Stata::create([
+                                'student_id'=>$id,
+                                'comment'=>'Special exam on the unit '.($unit->unit_code).' '.($unit->unit_title),
+                                'author_id'=>Auth()->user()->id
+                            ]);
+                        }
                     }
                 }
             }
@@ -270,7 +120,6 @@ class ExamController extends Controller
         return back()->with('message', 'Please Check your file, Something is wrong there.');
     }
 
-
     public function show($id)
     {
         $items=Exam::where('unit_id',$id)->orderBy('reg_no','asc')->join('students','student_id','=','students.id')->select('exams.*','students.student_name','students.reg_no')->get();
@@ -278,8 +127,7 @@ class ExamController extends Controller
         $pass = Pass::where('unit_code',$id)->get();
         $specs = Special::where('unit_code',$id)->get();
         $sups = Sup::where('unit_code',$id)->get();
-        $totals=ExamTotal::where('unit_id',$id)->first();
-        return view('exams.index',compact('items','unit','totals','pass','specs','sups'));
+        return view('exams.index',compact('items','unit','pass','specs','sups'));
     }
 
     public function edit($id,$year,$sem)
@@ -298,8 +146,8 @@ class ExamController extends Controller
     {
         //
     }
-    public function exExam($id,$year){
+    public function exExam($i,$c,$y){
         // return Excel::download(new ExamExport, (Auth()->user()->department).'B.xlsx', null, ['X-Vapor-Base64-Encode' => 'True']);
-        return Excel::download(new ExamExport, 'exam.xlsx');
+        return Excel::download(new ExamExport($i,$c,$y), 'exam.xlsx');
     }
 }

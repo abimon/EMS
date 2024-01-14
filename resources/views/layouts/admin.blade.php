@@ -99,7 +99,7 @@
 
     </header><!-- End Header -->
 
-    <!-- ======= Sidebar ======= 
+    <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
 
         <ul class="sidebar-nav" id="sidebar-nav">
@@ -117,9 +117,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{route('unit.index')}}">
-                    <i class="bi bi-files"></i>
-                    <span>Units</span>
+                <a class="nav-link collapsed" href="/student">
+                    <i class="bi bi-people"></i>
+                    <span>Students</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -136,7 +136,8 @@
             </li>
         </ul>
 
-    </aside>End Sidebar-->
+    </aside>
+    <!--End Sidebar-->
 
     <main id="main" class="main" style="min-height: 400px;">
         <div class="pagetitle">

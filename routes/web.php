@@ -3,6 +3,7 @@
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DepController;
 use App\Http\Controllers\ExamController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use App\Models\Course;
@@ -34,16 +35,19 @@ Route::middleware('auth')->group(function(){
         'department'=>DepController::class,
         'course'=>CourseController::class,
         'user'=>UserController::class,
-        'unit'=>UnitController::class
+        'unit'=>UnitController::class,
+        'students'=>StudentController::class,
         ]);
+
     Route::get('/dashboard',function(){return view('dashboard');} );
     Route::get('/profile',function(){
         $fac = Department::where('uni_id',Auth()->user()->uni_id)->first();
         return view('profile',compact('fac'));
     } );
+    Route::get('/student',[StudentController::class,'edit']);
 
     Route::get('/cms/{i}/{y}/{s}',[ExamController::class,'edit']);
-    Route::get('/examExport/{i}/{y}',[ExamController::class,'exExam']);
+    Route::get('/examExport/{i}/{c}/{y}',[ExamController::class,'exExam']);
 });
 Auth::routes();
 

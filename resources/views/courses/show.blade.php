@@ -32,7 +32,9 @@
                             <form action="{{route('unit.store')}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="modal-body">
-                                    Upload Excel sheet containing units in this course. Remember to format columns in the order <b>"unit code|unit title|year|semester"</b> without empty column or headers.
+                                    <p>
+                                    Upload Excel sheet containing units in this course. Remember to format columns in the order <b>"unit code | unit title | year| semester"</b> without empty column or headers.
+                                    </p>
                                     <label for="">Units</label>
                                     <input type="hidden" name='id' value="{{$course->id}}">
                                     <input type="file" name="file" placeholder="units" id="" class="form-control mb-2">
@@ -73,10 +75,11 @@
                                             <h1 class="modal-title fs-5" id="staticBackdropLabel">Upload Exams</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        <form action="{{ route('exams.store') }}" method="POST" enctype="multipart/form-data">
+                                        <form action="{{ route('exams.store',['unit_id'=>$unit->id]) }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <div class="modal-body">
-                                                <input type="hidden" name="unit_id" value="{{$unit->id}}">
+                                                <p>Upload Excel sheet containing exam results in this unit. Remember to format columns in the order <b>"student_reg_no | student_name |attempt | CAT_and_Assignment_score | Exam_score"</b> without empty column or headers.</p>
+                                                
                                                 <input type="text" class="form-control" value="{{$unit->unit_code}}" disabled>
                                                 <div class="form-group m-1">
                                                     <input type="file" name="file" accept=".xls,.xlsx" id="file" class="form-control">

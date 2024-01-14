@@ -94,7 +94,6 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <!-- <button type="button" class="btn btn-primary">Understood</button> -->
                         </div>
                     </div>
                 </div>
@@ -127,17 +126,6 @@
     </script>
     <table class="table table-responsive table-striped-columns" id="myTable">
         <thead>
-            <!-- <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th colspan="4" class="text-center">CATs</th>
-                <th colspan="4" class="text-center">ASSIGNMENTS</th>
-                <th></th>
-                <th colspan="6" class="text-center">EXAM QUIZES</th>
-                <th></th>
-                <th></th>
-            </tr> -->
             <tr>
                 <th>#</th>
                 <th>Student</th>
@@ -148,50 +136,17 @@
             </tr>
         </thead>
         <tbody>
-            <!-- <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th>x/{{$totals->CAT1}}</th>
-                <th>x/{{$totals->CAT2}}</th>
-                <th>x/{{$totals->CAT3}}</th>
-                <th>x/{{$totals->CAT_total}}</th>
-                <th>x/{{$totals->ASN1}}</th>
-                <th>x/{{$totals->ASN2}}</th>
-                <th>x/{{$totals->ASN3}}</th>
-                <th>x/{{$totals->ASN_total}}</th>
-                <th>x/{{($totals->ASN_total)+($totals->CAT_total)}}</th>
-                <th>x/{{$totals->Q1}}</th>
-                <th>x/{{$totals->Q2}}</th>
-                <th>x/{{$totals->Q3}}</th>
-                <th>x/{{$totals->Q4}}</th>
-                <th>x/{{$totals->Q5}}</th>
-                <th>x/{{$totals->exam_total}}</th>
-                <th>x/{{($totals->exam_total)+($totals->ASN_total)+($totals->CAT_total)}}</th>
-                <th></th>
-            </tr> -->
             @foreach($items as $key=>$item)
             <tr>
-
                 <td>{{$key+1}}</td>
                 <td>{{$item->reg_no}} <br> <small>{{$item->student_name}}</small></td>
-                <!-- <td>{{$item->attempt}}</td> -->
-                <!-- <td class="{{$item->CAT1==''?'bg-dark':''}}">{{$item->CAT1}}</td>
-                <td class="{{$item->CAT2==''?'bg-dark':''}}">{{$item->CAT2}}</td>
-                <td class="{{$item->CAT3==''?'bg-dark':''}}">{{$item->CAT3}}</td> -->
-                <!-- <td>{{$item->CAT_t}}</td> -->
-                <!-- <td class="{{$item->ASN1==''?'bg-dark':''}}">{{$item->ASN1}}</td>
-                <td class="{{$item->ASN2==''?'bg-dark':''}}">{{$item->ASN2}}</td>
-                <td class="{{$item->ASN3==''?'bg-dark':''}}">{{$item->ASN3}}</td> -->
-                <!-- <td>{{$item->ASN_t}}</td> -->
-                <td>{{($item->CAT_t)+($item->ASN_t)}}</td>
-                <!-- <td class="{{$item->Q1==''?'bg-dark':''}}">{{$item->Q1}}</td>
-                <td class="{{$item->Q2==''?'bg-dark':''}}">{{$item->Q2}}</td>
-                <td class="{{$item->Q3==''?'bg-dark':''}}">{{$item->Q3}}</td>
-                <td class="{{$item->Q4==''?'bg-dark':''}}">{{$item->Q4}}</td>
-                <td class="{{$item->Q5==''?'bg-dark':''}}">{{$item->Q5}}</td> -->
-                <td>{{$item->Exam_t}}</td>
-                <td>{{$item->marks}}</td>
+                <td>{{$item->CAT}}</td>
+                <td>{{$item->Exam}}</td>
+                    @if(($item->Exam!=null)&&($item->CAT!=null))
+                    <td>{{($item->Exam)+($item->CAT)}}</td>
+                    @else
+                    <td class="{{(($item->CAT==null)&&($item->Exam==null))?'bg-danger text-light':'bg-warning text-dark'}}">INCOMPLETE</td>
+                    @endif
                 <?php $g = $item->marks; ?>
                 <td>@if($g>=70)
                     A
@@ -202,27 +157,20 @@
                     @elseif($g>=40)
                     D
                     @elseif($g>0)
-                    @if(($item->CAT1==null)||($item->CAT2==null)||($item->CAT3==null))
-                    <i class="text-danger">CAT marks missing</i><br>
-                    @endif
-                    @if(($item->ASN1==null)||($item->ASN2==null)||($item->ASN3==null))
-                    <i class="text-danger">Assignment marks missing</i><br>
-                    @endif
-                    @if(($item->Exam_t==null)||($item->Exam_t==0))
-                    <i class="text-danger">EXAM marks missing</i><br>
-                    @endif
-                    E
-
+                        @if($item->CAT==null)
+                        <i class="text-danger">CAT marks missing</i><br>
+                        @endif
+                        @if($item->Exam==null)
+                        <i class="text-danger">EXAM marks missing</i><br>
+                        @endif
+                        E
                     @else
-                    @if(($item->CAT1==null)||($item->CAT2==null)||($item->CAT3==null))
-                    <i class="text-danger">CAT marks missing</i><br>
-                    @endif
-                    @if(($item->ASN1==null)||($item->ASN2==null)||($item->ASN3==null))
-                    <i class="text-danger">Assignment marks missing</i><br>
-                    @endif
-                    @if(($item->Exam_t==null)||($item->Exam_t==0))
-                    <i class="text-danger">EXAM marks missing</i><br>
-                    @endif
+                        @if($item->CAT==null)
+                        <i class="text-danger">CAT marks missing</i><br>
+                        @endif
+                        @if($item->Exam==null)
+                        <i class="text-danger">EXAM marks missing</i><br>
+                        @endif
                     @endif
                 </td>
             </tr>

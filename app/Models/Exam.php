@@ -11,25 +11,11 @@ class Exam extends Model
     protected $fillable = [
         'unit_id',
         'student_id',
-        't_id',
         'attempt',
-        'CAT1',
-        'CAT2',
-        'CAT3',
-        'ASN1',
-        'ASN2',
-        'ASN3',
-        'Q1',
-        'Q2',
-        'Q3',
-        'Q4',
-        'Q5',
-        'marks',
-        'CAT_t',
-        'ASN_t',
-        'Exam_t'
+        'CAT',
+        'Exam'
     ];
-    protected $guarded = ['id'];
+    // protected $guarded = ['id'];
     public function course(){
         return $this->belongsTo(Course::class, 'dep_id', 'id');
     }

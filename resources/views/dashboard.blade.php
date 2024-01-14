@@ -26,11 +26,19 @@
                     </div>
                 </a>
             </div>
-            <div class="col-md-5 col-6 p-2">
+            <div class="col-md-4 col-6 p-2">
+                <a href="" style="text-decoration: none;" class="link">
+                    <div class="card p-1 text-center">
+                        <h1 class="bi bi-people m-3"></h1>
+                        <p class="text-center">Students</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 col-6 p-2">
                 <a href="" style="text-decoration: none;" class="link">
                     <div class="card p-1 text-center">
                         <h1 class="bi bi-mortarboard m-3"></h1>
-                        <p class="text-center">Graduation Lists</p>
+                        <p class="text-center">Course Mark Sheets</p>
                     </div>
                 </a>
             </div>

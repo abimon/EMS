@@ -39,7 +39,7 @@
 
 namespace App\Exports;
 
-use App\Invoice;
+use App\Models\Pass;
 use App\Models\Student;
 use App\Models\Unit;
 use Illuminate\Contracts\View\View;
@@ -47,10 +47,22 @@ use Maatwebsite\Excel\Concerns\FromView;
 
 class ExamExport implements FromView
 {
+    protected $unit_id;
+    protected $course_id;
+    protected $year;
+
+    function __construct($unit_id,$course_id,$year)
+    {
+        $this->unit_id = $unit_id;
+        $this->course_id = $course_id;
+        $this->year = $year;
+    }
     public function view(): View
     {
-        $students=Student::all();
-        $units=Unit::where([['course_id',1],['yearG',1]])->get();
-        return view('examcms', compact('students','units'))->with('exams');
+        $students = Student::all();
+        $pass = Pass::all();
+        $units = Unit::where([['course_id', $this->course_id], ['yearG', $this->year]])->get();
+        // return view('examcms', compact('students','units'))->with('exams');
+        return view('exports.exam', compact('students', 'units','pass'));
     }
 }

@@ -38,9 +38,9 @@ class CourseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($title)
+    public function show($id)
     {
-        $course= Course::where('course_name',$title)->first();
+        $course= Course::findOrFail($id);
         return view('courses.show',compact('course'))->with('units');
     }
 
