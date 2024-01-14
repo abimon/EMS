@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ExamExport;
 use App\Imports\ExamImport;
 use App\Models\Exam;
 use App\Models\ExamTotal;
@@ -12,6 +13,7 @@ use App\Models\Sup;
 use App\Models\Unit;
 use App\Models\University;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ExamController extends Controller
@@ -283,7 +285,6 @@ class ExamController extends Controller
     public function edit($id,$year,$sem)
     {
         $students=Student::all();
-        //Separate students into year groups considering students retaking exams
         $units=Unit::where([['course_id',$id],['yearG',$year],['sem',$sem]])->get();
         return view('examcms',compact('students','units'))->with('exams');
     }
@@ -296,5 +297,9 @@ class ExamController extends Controller
     public function destroy(Exam $exam)
     {
         //
+    }
+    public function exExam($id,$year){
+        // return Excel::download(new ExamExport, (Auth()->user()->department).'B.xlsx', null, ['X-Vapor-Base64-Encode' => 'True']);
+        return Excel::download(new ExamExport, 'exam.xlsx');
     }
 }

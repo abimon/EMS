@@ -41,7 +41,9 @@ Route::middleware('auth')->group(function(){
         $fac = Department::where('uni_id',Auth()->user()->uni_id)->first();
         return view('profile',compact('fac'));
     } );
+
     Route::get('/cms/{i}/{y}/{s}',[ExamController::class,'edit']);
+    Route::get('/examExport/{i}/{y}',[ExamController::class,'exExam']);
 });
 Auth::routes();
 
