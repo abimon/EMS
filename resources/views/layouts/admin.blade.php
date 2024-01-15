@@ -111,31 +111,49 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{route('course.index')}}">
-                    <i class="bi bi-person-vcard-fill"></i>
-                    <span>Courses</span>
-                </a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link collapsed" href="/student">
                     <i class="bi bi-people"></i>
                     <span>Students</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{route('exams.index')}}">
-                    <i class="bi bi-calendar"></i>
-                    <span>Exams</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="/universities">
-                <i class="bi bi-mortarboard"></i>
-                    <span>Universities</span>
-                </a>
+            <li class="">
+                <div class="nav-item" id="accordionPanelsStayOpen">
+                    <div class="">
+                        <h2 class="accordion-header">
+                            <div class="accordion-button collapsed nav-link" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen" aria-expanded="false" aria-controls="panelsStayOpen">
+                            <i class="bi bi-files"></i>
+                               <span> Courses</span>
+                            </div>
+                        </h2>
+                        <div id="panelsStayOpen" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                <?php
+                                $dep = App\Models\Department::where('dep_name', Auth()->user()->department)->first();
+                                $courses = App\Models\Course::where('dep_id', $dep->id)->get();
+                                ?>
+                                @foreach($courses as $item)
+                                <div class="" id="accordionPanelsStayOpenExample">
+                                    <div class="">
+                                        <h5 class="accordion-header">
+                                            <p class="w-100 btn mb-2 btn-secondary nav-item collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-{{$item->id}}" aria-expanded="false" aria-controls="panelsStayOpen-{{$item->id}}">
+                                                {{$item->course_name}}
+                                            </p>
+                                        </h5>
+                                        <div id="panelsStayOpen-{{$item->id}}" class="accordion-collapse collapse">
+                                            <div class="accordion-body">
+                                                <a href="{{route('course.show',$item->id)}}"><button class="w-100 btn mb-2 btn-primary nav-item">View Units</button></a>
+                                                <a href="{{route('students.index',['id'=>$item->id])}}"><button class="w-100 btn mb-2 btn-info nav-item">View Students</button></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </li>
         </ul>
-
     </aside>
     <!--End Sidebar-->
 
