@@ -18,7 +18,7 @@
             @endif
         </div>
         <div class="row d-flex justify-content-between">
-            <div class="col-md-4 col-6 p-2">
+            <div class="col-md-4 col-6 p-2 bg-success">
                 <a href="{{route('course.index')}}" style="text-decoration: none;" class="link">
                     <div class="card p-1 text-center">
                         <h1 class="bi bi-person-vcard-fill m-3"></h1>
@@ -26,7 +26,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-md-4 col-6 p-2">
+            <div class="col-md-4 col-6 p-2 bg-info">
                 <a href="/student" style="text-decoration: none;" class="link">
                     <div class="card p-1 text-center">
                         <h1 class="bi bi-people m-3"></h1>
@@ -34,7 +34,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-md-4 col-6 p-2">
+            <div class="col-md-4 col-6 p-2 bg-primary">
                 <a href="" style="text-decoration: none;" class="link">
                     <div class="card p-1 text-center">
                         <h1 class="bi bi-mortarboard m-3"></h1>
