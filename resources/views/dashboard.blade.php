@@ -1,4 +1,4 @@
-@extends('layouts.tables')
+@extends('layouts.admin')
 @section('content')
 <div class="card col-md-8 col-11">
     <div class="card-header d-flex justify-content-between">
