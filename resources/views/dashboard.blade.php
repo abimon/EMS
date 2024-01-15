@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 @section('content')
-<div class="card">
+<div class="card bg-dark" style="min-height: 400px;">
     <div class="card-header d-flex justify-content-between">
         {{ __('Dashboard') }}
         <div>
-            <i class="fa-solid fa-clock text-secondary"></i> {{(date_diff(date_create(date_format(Auth()->user()->updated_at,'Y-m-d')),date_create(date('Y-m-d'))))->format('%a/30 days')}}
+            <i class="fa-solid fa-clock text-dark"></i> {{(date_diff(date_create(date_format(Auth()->user()->updated_at,'Y-m-d')),date_create(date('Y-m-d'))))->format('%a/30 days')}}
         </div>
     </div>
 
@@ -20,7 +20,7 @@
         <div class="row d-flex justify-content-between">
             <div class="col-md-4 col-6 p-2 ">
                 <a href="{{route('course.index')}}" style="text-decoration: none;" class="link">
-                    <div class="card p-1 text-center bg-success">
+                    <div class="card p-1 text-center bg-success text-light">
                         <h1 class="bi bi-person-vcard-fill m-3"></h1>
                         <p class="text-center">Courses</p>
                     </div>
@@ -28,7 +28,7 @@
             </div>
             <div class="col-md-4 col-6 p-2">
                 <a href="/student" style="text-decoration: none;" class="link">
-                    <div class="card p-1 text-center bg-info">
+                    <div class="card p-1 text-center bg-warning text-light">
                         <h1 class="bi bi-people m-3"></h1>
                         <p class="text-center">Students</p>
                     </div>
@@ -36,7 +36,7 @@
             </div>
             <div class="col-md-4 col-6 p-2 ">
                 <a href="" style="text-decoration: none;" class="link">
-                    <div class="card p-1 text-center bg-primary">
+                    <div class="card p-1 text-center bg-primary text-light">
                         <h1 class="bi bi-mortarboard m-3"></h1>
                         <p class="text-center">Course Mark Sheets</p>
                     </div>

@@ -27,12 +27,12 @@
 
 <body>
 
-    <header id="header" class="header fixed-top d-flex align-items-center">
+    <header id="header" class="header fixed-top d-flex align-items-center bg-dark ">
 
         <div class="d-flex align-items-center justify-content-between">
             <a href="/" class="logo d-flex align-items-center">
                 <img src="{{asset('storage/img/logo.png')}}" alt="">
-                <span class="d-none d-lg-block">APEK EMS</span>
+                <span class="d-none d-lg-block text-light">APEK EMS</span>
             </a>
             <!-- <i class="bi bi-list toggle-sidebar-btn"></i> -->
         </div>
@@ -42,8 +42,8 @@
                 <li class="nav-item dropdown pe-3">
 
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        <i class=" fa fa-user fa-2x rounded-circle"></i>
-                        <span class="d-none d-md-block dropdown-toggle ps-2 text-dark me-2">{{Auth()->User()->name}}</span>
+                        <i class=" fa fa-user fa-2x rounded-circle text-light"></i>
+                        <span class="d-none d-md-block dropdown-toggle ps-2 text-light me-2">{{Auth()->User()->name}}</span>
                     </a><!-- End Profile Iamge Icon -->
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -100,18 +100,18 @@
     </header><!-- End Header -->
 
     <!-- ======= Sidebar ======= -->
-    <aside id="sidebar" class="sidebar">
+    <aside id="sidebar" class="sidebar bg-dark text-light">
 
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link " href="/dashboard">
+                <a class="nav-link bg-dark text-light" href="/dashboard">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="/student">
+                <a class="nav-link collapsed bg-dark text-light" href="/student">
                     <i class="bi bi-people"></i>
                     <span>Students</span>
                 </a>
@@ -120,7 +120,7 @@
                 <div class="nav-item" id="accordionPanelsStayOpen">
                     <div class="">
                         <h2 class="accordion-header">
-                            <div class="accordion-button collapsed nav-link" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen" aria-expanded="false" aria-controls="panelsStayOpen">
+                            <div class="accordion-button collapsed nav-link bg-dark text-light" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen" aria-expanded="false" aria-controls="panelsStayOpen">
                             <i class="bi bi-files"></i>
                                <span> Courses</span>
                             </div>
@@ -135,7 +135,7 @@
                                 <div class="" id="accordionPanelsStayOpenExample">
                                     <div class="">
                                         <h5 class="accordion-header">
-                                            <p class="w-100 btn mb-2 btn-secondary nav-item collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-{{$item->id}}" aria-expanded="false" aria-controls="panelsStayOpen-{{$item->id}}">
+                                            <p class="w-100 btn mb-2 btn-secondary nav-item collapsed bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-{{$item->id}}" aria-expanded="false" aria-controls="panelsStayOpen-{{$item->id}}">
                                                 {{$item->course_name}}
                                             </p>
                                         </h5>
@@ -157,7 +157,7 @@
     </aside>
     <!--End Sidebar-->
 
-    <main id="main" class="main" style="min-height: 400px;">
+    <main id="main" class="main " style="min-height: 400px;">
         <div class="pagetitle">
             <h1 style="text-transform: capitalize;">{{request()->path()}}</h1>
             <nav>
