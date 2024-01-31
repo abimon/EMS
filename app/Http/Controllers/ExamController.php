@@ -147,8 +147,8 @@ class ExamController extends Controller
     {
         //
     }
-    public function exExam($c,$y){
+    public function exExam($c,$y,$sem){
         $cor = (Course::findOrFail($c))->course_name;
-        return Excel::download(new ExamExport($c,$y), $cor.'_year_'.$y.'_exam_results.xlsx');
+        return Excel::download(new ExamExport($c,$y,$sem), $cor.'_year_'.$y.'_sem_'.$sem.'_exam_results.xlsx');
     }
 }

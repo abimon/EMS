@@ -49,13 +49,13 @@ use Maatwebsite\Excel\Concerns\FromView;
 
 class ExamExport implements FromView
 {
-    protected $unit_id;
+    protected $sem;
     protected $course_id;
     protected $year;
 
-    function __construct($course_id,$year)
+    function __construct($course_id,$year,$sem)
     {
-        // $this->unit_id = $unit_id;
+        $this->sem = $sem;
         $this->course_id = $course_id;
         $this->year = $year;
     }
@@ -63,7 +63,7 @@ class ExamExport implements FromView
     {
         $students = Student::all();
         $pass = Pass::all();
-        $units = Unit::where([['course_id', $this->course_id], ['yearG', $this->year]])->get();
+        $units = Unit::where([['course_id', $this->course_id],['sem', $this->sem], ['yearG', $this->year]])->get();
         // return view('examcms', compact('students','units'))->with('exams');
         return view('exports.exam', compact('students', 'units','pass'))->with('exams');
     }

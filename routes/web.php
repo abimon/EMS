@@ -47,7 +47,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/student',[StudentController::class,'edit']);
 
     Route::get('/cms/{i}/{y}/{s}',[ExamController::class,'edit']);
-    Route::get('/examExport/{c}/{y}',[ExamController::class,'exExam']);
+    Route::get('/examExport/{c}/{y}/{s}',[ExamController::class,'exExam']);
 });
 Auth::routes();
 
