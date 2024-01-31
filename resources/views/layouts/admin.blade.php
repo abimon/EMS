@@ -161,11 +161,11 @@
         <div class="pagetitle">
             <h1 style="text-transform: capitalize;">{{request()->path()}}</h1>
             <nav>
-                <ol class="breadcrumb">
+                <!-- <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
                     <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
                     <li class="breadcrumb-item active" style="text-transform: capitalize;">{{request()->path()}}</li>
-                </ol>
+                </ol> -->
             </nav>
         </div>
         @if (Session::has('message'))

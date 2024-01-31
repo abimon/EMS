@@ -91,7 +91,7 @@
                 <div class="row justify-content-center">
                     <div class="{{(request()->path()=='/')||(request()->path()=='user')?'col-md-10':((request()->path()=='exams')?'col-md-12':'col-md-8')}}">
                         <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
+                            <!-- <ol class="breadcrumb">
                                 @if(request()->path()=='dashboard')
                                 <li class="breadcrumb-item"><a href="/">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page"><span style="text-transform: capitalize;">{{request()->path()}}</span></li>
@@ -106,7 +106,7 @@
                                 @elseif((request()->path()!='login')||(request()->path()!='register'))
 
                                 @endif
-                            </ol>
+                            </ol> -->
                         </nav>
                         @yield('content')
                     </div>

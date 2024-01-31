@@ -39,6 +39,8 @@
 
 namespace App\Exports;
 
+use App\Models\Course;
+use App\Models\Exam;
 use App\Models\Pass;
 use App\Models\Student;
 use App\Models\Unit;
@@ -51,9 +53,9 @@ class ExamExport implements FromView
     protected $course_id;
     protected $year;
 
-    function __construct($unit_id,$course_id,$year)
+    function __construct($course_id,$year)
     {
-        $this->unit_id = $unit_id;
+        // $this->unit_id = $unit_id;
         $this->course_id = $course_id;
         $this->year = $year;
     }
@@ -63,6 +65,6 @@ class ExamExport implements FromView
         $pass = Pass::all();
         $units = Unit::where([['course_id', $this->course_id], ['yearG', $this->year]])->get();
         // return view('examcms', compact('students','units'))->with('exams');
-        return view('exports.exam', compact('students', 'units','pass'));
+        return view('exports.exam', compact('students', 'units','pass'))->with('exams');
     }
 }

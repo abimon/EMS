@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\ExamExport;
 use App\Imports\ExamImport;
+use App\Models\Course;
 use App\Models\Exam;
 use App\Models\ExamTotal;
 use App\Models\Pass;
@@ -146,8 +147,8 @@ class ExamController extends Controller
     {
         //
     }
-    public function exExam($i,$c,$y){
-        // return Excel::download(new ExamExport, (Auth()->user()->department).'B.xlsx', null, ['X-Vapor-Base64-Encode' => 'True']);
-        return Excel::download(new ExamExport($i,$c,$y), 'exam.xlsx');
+    public function exExam($c,$y){
+        $cor = (Course::findOrFail($c))->course_name;
+        return Excel::download(new ExamExport($c,$y), $cor.'_year_'.$y.'_exam_results.xlsx');
     }
 }
