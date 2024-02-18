@@ -1,7 +1,11 @@
 @extends('layouts.admin')
 @section('content')
 <div class="container-fluid">
-    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search Reg. No..." class="m-2 form-control w-50">
+    <div class="row d-flex justify-content-between">
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search Reg. No..." class="mb-2 form-control w-50">
+        <button type="button" class="mb-2 btn btn-primary col-md-3" data-bs-toggle="modal" data-bs-target="#addstu"><i class="fa fa-upload"></i> Students</button>
+    </div>
+
     <script>
         function myFunction() {
             // Declare variables
@@ -25,6 +29,38 @@
             }
         }
     </script>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="addstu" tabindex="-1" aria-labelledby="addstuLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="addstuLabel">Upload Students</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{route('students.store')}}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <p>
+                            Upload Excel sheet containing students in this course. Remember to format columns in the order <b>"registration_no|name|year_of_intake|identifier(if any)"</b> without empty column or headers.
+                        </p>
+                        <select name="course_id" id="" class="form-select" required>
+                            <option value="">Select Course</option>
+                            @foreach($courses as $course)
+                            <option value="{{$course->id}}">{{$course->course_name}}</option>
+                            @endforeach
+                        </select>
+                        <input type="file" name="students" placeholder="Students" id="" class="form-control mb-2">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <table class="table table-scroll table-info table-striped table-hover" id="myTable">
         <thead>
             <tr>

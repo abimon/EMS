@@ -3,6 +3,9 @@
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DepController;
 use App\Http\Controllers\ExamController;
+use App\Http\Controllers\semController;
+use App\Http\Controllers\semStudentsController;
+use App\Http\Controllers\semUnitsController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
@@ -14,22 +17,11 @@ use App\Models\Unit;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 Route::get('/', function () {
     return view('home');
 });
 Route::get('/home',function(){return redirect('/');} );
-Route::middleware('auth')->group(function(){
+Route::middleware('auth','XSS')->group(function(){
     Route::resources([
         'exams'=>ExamController::class,
         'department'=>DepController::class,
@@ -37,6 +29,9 @@ Route::middleware('auth')->group(function(){
         'user'=>UserController::class,
         'unit'=>UnitController::class,
         'students'=>StudentController::class,
+        'sem'=>semController::class,
+        'semStudents'=>semStudentsController::class,
+        'semUnits'=>semUnitsController::class,
         ]);
 
     Route::get('/dashboard',function(){return view('dashboard');} );

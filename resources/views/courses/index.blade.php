@@ -49,37 +49,8 @@
             @foreach($courses as $key=>$course)
             <tr>
                 <td>{{$key+1}}</td>
-                <td>{{$course->course_name}}</td>
-                <td>{{Auth()->user()->department}}</td>
-                <td>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addstu"><i class="fa fa-upload"></i> Students</button>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="addstu" tabindex="-1" aria-labelledby="addstuLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="addstuLabel">Upload Students</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <form action="{{route('students.store')}}" method="post" enctype="multipart/form-data">
-                                    @csrf
-                                    <input type="hidden" name="course_id" value="{{$course->id}}">
-                                    <div class="modal-body">
-                                        <p>
-                                        Upload Excel sheet containing students in this course. Remember to format columns in the order <b>"registration_no|name|year_of_intake|identifier(if any)"</b> without empty column or headers.
-                                        </p>
-                                        <input type="file" name="students" placeholder="Students" id="" class="form-control mb-2">
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary">Save</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </td>
+                <td><a href="{{route('course.show',$course->id)}}">{{$course->course_name}}</a></td>
+                <td>{{$course->department->dep_name}}</td>
                 <td>
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="true">

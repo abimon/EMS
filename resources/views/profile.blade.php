@@ -77,12 +77,12 @@
                   <div class="col-md-8 col-lg-9">
                     <img id="output" src="{{asset('storage/profile/'.Auth()->User()->avatar)}}" />
                     <input type="file" accept="image/jpeg, image/png" name="avatar" id="file" style="display: none;" class="form-control" onchange="loadFile(event)">
-                    
+
                     <script>
                       var loadFile = function(event) {
                         var image = document.getElementById('output');
                         image.src = URL.createObjectURL(event.target.files[0]);
-                        document.getElementById('output').value==image.src;
+                        document.getElementById('output').value == image.src;
                       };
                     </script>
                     <div class="pt-2">
@@ -119,6 +119,7 @@
                     <input name="email" type="email" class="form-control" id="Email" value="{{Auth()->user()->email}}">
                   </div>
                 </div>
+                @if(Auth()->user()->department_id==null)
                 <div class="row mb-3">
                   <label for="faculty" class="col-md-4 col-lg-3 col-form-label">Faculty/College/School</label>
                   <div class="col-md-8 col-lg-9">
@@ -141,7 +142,7 @@
                   </div>
                   @enderror
                 </div>
-
+                @endif
                 <div class="text-center">
                   <button type="submit" class="btn btn-primary">Save Changes</button>
                 </div>

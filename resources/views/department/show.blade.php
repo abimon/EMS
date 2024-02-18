@@ -22,7 +22,7 @@
                         <h1 class="modal-title fs-5" id="addCourseLabel">Add Course</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="{{route('course.store')}}" method="post">
+                    <form action="{{route('course.store')}}" method="put">
                         @csrf
                         <div class="modal-body">
                             <input type="text" name="course_name" placeholder="Course Name" id="" class="form-control mb-2">

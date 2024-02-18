@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('passes', function (Blueprint $table) {
             $table->id();
-            $table->string('unit_code');
             $table->unsignedBigInteger('exam_id');
             $table->timestamps();
             $table->foreign('exam_id')->references('id')->on('exams')->onDelete('cascade');

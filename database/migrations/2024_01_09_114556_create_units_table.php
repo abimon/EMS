@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('unit_code');
             $table->string('yearG');
             $table->string('sem');
+            $table->string('need')->nullable();
+            $table->string('category')->nullable();
             $table->timestamps();
 
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');

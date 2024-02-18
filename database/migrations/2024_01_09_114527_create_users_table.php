@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('role')->default('Guest');
             $table->unsignedBigInteger('uni_id');
-            $table->string('department')->nullable();
+            $table->integer('department_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
 

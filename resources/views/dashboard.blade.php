@@ -17,7 +17,7 @@
             </div>
             @endif
         </div>
-        <div class="row d-flex justify-content-between">
+        <div class="row d-flex justify-content-center">
             <div class="col-md-4 col-6 p-2 ">
                 <a href="{{route('course.index')}}" style="text-decoration: none;" class="link">
                     <div class="card p-1 text-center bg-success text-light">
@@ -38,60 +38,26 @@
                 <a href="" style="text-decoration: none;" class="link">
                     <div class="card p-1 text-center bg-primary text-light">
                         <h1 class="bi bi-mortarboard m-3"></h1>
-                        <p class="text-center">Course Mark Sheets</p>
+                        <p class="text-center">Semester Records</p>
                     </div>
                 </a>
             </div>
-            <!-- 
-                <div class="col-md-4 col-6 p-2">
+            <div class="col-md-4 col-6 p-2">
                 <a href="{{route('user.index')}}" style="text-decoration: none;" class="link">
                     <div class="card p-1 text-center">
                         <i class="fas fa-users fa-2x m-3"></i>
                         <p class="text-center">Users</p>
                     </div>
                 </a>
-                </div>
-                <div class="col-md-4 col-6 p-2">
-                    <a href="/recharge" style="text-decoration: none;" class="link">
-                        <div class="card p-1 text-center">
-                            <i class="fa-solid fa-donate fa-2x m-3"></i>
-                            <p class="text-center">Top Up</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4 col-6 p-2">
-                    <a href="/bulk" style="text-decoration: none;" class="link">
-                        <div class="card p-1 text-center">
-                            <i class="fa fa-comments fa-2x m-3"></i>
-                            <p class="text-center">Send Bulk</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4 col-6 p-2">
-                    <a href="/single" style="text-decoration: none;" class="link">
-                        <div class="card p-1 text-center">
-                            <i class="fa fa-comment fa-2x m-3"></i>
-                            <p class="text-center">Send Single</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4 col-6 p-2">
-                    <a href="/integrate" style="text-decoration: none;" class="link">
-                        <div class="card p-1 text-center">
-                            <i class="fa fa-code-branch fa-2x m-3"></i>
-                            <p class="text-center">Integrate</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4 col-6 p-2">
-                    <a href="{{route('exams.index')}}" style="text-decoration: none;" class="link">
-                        <div class="card p-1 text-center">
-                            <i class="fa fa-list-check fa-2x m-3"></i>
-                            <p class="text-center">Exams</p>
-                        </div>
-                    </a>
-                </div> 
-            -->
+            </div>
+            <div class="col-md-4 col-6 p-2">
+                <a href="{{route('sem.index')}}" style="text-decoration: none;" class="link">
+                    <div class="card p-1 text-center">
+                        <i class="fa fa-gears fa-2x m-3"></i>
+                        <p class="text-center">Semester</p>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 </div>

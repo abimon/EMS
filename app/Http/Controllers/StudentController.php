@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Imports\StudentImport;
+use App\Models\Course;
 use App\Models\Exam;
 use App\Models\Stata;
 use App\Models\Student;
@@ -15,7 +16,16 @@ class StudentController extends Controller
     public function index()
     {
         $users=Student::where('course_id',request()->id)->get();
-        return view('students.index',compact('users'));
+        $students=[];
+        $courses = Course::where('dep_id',Auth()->user()->department_id)->get();
+        foreach($courses as $course){
+            $users=Student::where('course_id',$course->id)->get();
+            foreach($users as $user){
+                array_push($students,$user);
+            }
+        }
+        // return $students;
+        return view('students.index',compact('users','courses'));
     }
 
     /**
@@ -26,9 +36,6 @@ class StudentController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store()
     {
         request()->validate([
@@ -55,9 +62,6 @@ class StudentController extends Controller
         return back()->with('message', 'Please Check your file, Something is wrong there.');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show($id)
     {
         $exams=Exam::where('student_id',$id)->join('units','units.id','=','exams.unit_id')->select('exams.*','units.unit_code','units.unit_title')->get();
@@ -68,8 +72,17 @@ class StudentController extends Controller
 
     public function edit(Student $student)
     {
-        $users=Student::all();
-        return view('students.index',compact('users'));
+        // $users=Student::all();
+        $students=[];
+        $courses = Course::where('dep_id',Auth()->user()->department_id)->get();
+        foreach($courses as $course){
+            $users=Student::where('course_id',$course->id)->get();
+            foreach($users as $user){
+                array_push($students,$user);
+            }
+        }
+        // return $students;
+        return view('students.index',compact('users','courses'));
     }
 
     public function update(Request $request, Student $student)

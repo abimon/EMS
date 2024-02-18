@@ -28,14 +28,14 @@ class DepController extends Controller
     {
         $dep = Department::where('dep_name',request()->dep_name)->first();
         if(!$dep){
-            Department::create([
+            $dep=Department::create([
                 'uni_id'=>Auth()->user()->uni_id,
                 'dep_name'=>request()->dep_name,
                 'faculty'=>request()->faculty,
             ]);
         }
         User::where('id',Auth()->user()->id)->update([
-            'department'=>request()->dep_name
+            'department_id'=>$dep->id
         ]);
         return redirect()->route('course.index');
     }
@@ -61,7 +61,7 @@ class DepController extends Controller
             ]);
         }
         User::where('id',Auth()->user()->id)->update([
-            'department'=>request()->dep_name
+            'department_id'=>$id
         ]);
         return redirect()->route('course.index');
     }
@@ -72,6 +72,6 @@ class DepController extends Controller
         if($dep && ((Auth()->user()->isAllowed)==true)){
             Department::destroy($id);
         }
-        return redirect()->route('department.index');
+        return redirect()->route('course.index');
     }
 }

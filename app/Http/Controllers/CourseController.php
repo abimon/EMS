@@ -11,15 +11,13 @@ class CourseController extends Controller
 {
     public function index()
     {
-        $dep= Department::where('uni_id',Auth()->user()->uni_id)->first();
-        $courses = Course::where('dep_id',$dep->id)->get();
+        $courses = Course::where('dep_id',Auth()->user()->department_id)->get();
         return view('courses.index',compact('courses'))->with('units','department');
     }
 
     public function create()
     {
-        $dep=Department::where();
-        return view('courses.index');
+        
     }
 
     /**
@@ -27,9 +25,8 @@ class CourseController extends Controller
      */
     public function store()
     {
-        $dep = Department::where('dep_name',Auth()->user()->department)->first();
         Course::create([
-            'dep_id'=>$dep->id,
+            'dep_id'=>Auth()->user()->department_id,
             'course_name'=>request()->course_name,
         ]);
         return redirect()->back();

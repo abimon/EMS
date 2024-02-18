@@ -8,12 +8,12 @@ use App\Models\Course;
 use App\Models\Exam;
 use App\Models\ExamTotal;
 use App\Models\Pass;
+use App\Models\SemUnits;
 use App\Models\Special;
 use App\Models\Stata;
 use App\Models\Student;
 use App\Models\Sup;
 use App\Models\Unit;
-use App\Models\University;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Maatwebsite\Excel\Facades\Excel;
@@ -23,7 +23,7 @@ class ExamController extends Controller
     public function index()
     {
         $items=Exam::orderBy('reg_no','asc')->get();
-        $units = Unit::all();
+        $units = SemUnits::all();
         return view('exams.index',compact('items','units'));
     }
 
@@ -43,14 +43,12 @@ class ExamController extends Controller
             
             foreach ($data[0] as $da) {
                 if ($da[0] != null) {
-                    // student_reg_no|attempt|CAT_and_Assignment_score|Exam_score
                     $stude=Student::where('reg_no',$da[0])->orWhere('student_name',$da[1])->first();
-                    // return $stude;
                     $id=$stude->id;
-                    $unit = Unit::findOrFail(request()->unit_id);
-                    
+                    $unit = SemUnits::findOrFail(request()->unit_id);
                     $exam=Exam::create([
-                        'unit_id'=>request()->unit_id,
+                        'unit_id'=>$unit->id,
+                        'sem_id'=>$unit->sem_id,
                         'student_id'=>$id,
                         'attempt'=>$da[2],
                         'CAT'=>$da[3],

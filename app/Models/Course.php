@@ -13,7 +13,7 @@ class Course extends Model
         'course_name',
     ];
     protected $guarded = ['id'];
-    public function Dep(){
+    public function department(){
         return $this->belongsTo(Department::class, 'dep_id', 'id');
     }
     public function units()

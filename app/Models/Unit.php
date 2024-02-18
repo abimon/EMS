@@ -13,7 +13,9 @@ class Unit extends Model
         'unit_title',
         'unit_code',
         'sem',
-        'yearG'
+        'yearG',
+        'need',
+        'category'
     ];
     public function course(){
         return $this->belongsTo(Course::class, 'course_id', 'id');

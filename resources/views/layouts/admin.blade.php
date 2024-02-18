@@ -116,6 +116,18 @@
                     <span>Students</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed bg-dark text-light" href="/department">
+                    <i class="bi bi-boxes"></i>
+                    <span>Departments</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed bg-dark text-light" href="{{route('sem.index')}}">
+                    <i class="fa fa-gears"></i>
+                    <span>Semester</span>
+                </a>
+            </li>
             <li class="">
                 <div class="nav-item" id="accordionPanelsStayOpen">
                     <div class="">
@@ -128,8 +140,7 @@
                         <div id="panelsStayOpen" class="accordion-collapse collapse">
                             <div class="accordion-body">
                                 <?php
-                                $dep = App\Models\Department::where('dep_name', Auth()->user()->department)->first();
-                                $courses = App\Models\Course::where('dep_id', $dep->id)->get();
+                                $courses = App\Models\Course::where('dep_id', Auth()->user()->department_id)->get();
                                 ?>
                                 @foreach($courses as $item)
                                 <div class="" id="accordionPanelsStayOpenExample">
@@ -158,16 +169,6 @@
     <!--End Sidebar-->
 
     <main id="main" class="main " style="min-height: 400px;">
-        <div class="pagetitle">
-            <h1 style="text-transform: capitalize;">{{request()->path()}}</h1>
-            <nav>
-                <!-- <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-                    <li class="breadcrumb-item active" style="text-transform: capitalize;">{{request()->path()}}</li>
-                </ol> -->
-            </nav>
-        </div>
         @if (Session::has('message'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ Session::get('message') }}

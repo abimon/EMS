@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('sups', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('exam_id');
-            $table->string('unit_code');
             $table->timestamps();
             $table->foreign('exam_id')->references('id')->on('exams')->onDelete('cascade');
 
