@@ -186,13 +186,13 @@
                             </script>
                             <table class="table table-responsive table-striped-columns" id="myTable">
                                 <thead>
-                                    <?php $count = 0; ?>
+                                    <?php $count = 0; $res=false;?>
                                     <tr>
                                         <th>#</th>
                                         <th>Student</th>
                                         @foreach($uns as $unit)
                                         @if($unit->unit->exams->count()!=null)
-                                        <?php $count+=1;?>
+                                        <?php $count+=1;$res = true?>
                                         <th>{{$unit->unit->unit_code}}</th>
                                         @endif
                                         @endforeach
@@ -201,6 +201,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @if($res=true)
                                     @foreach($semStudents as $r=>$s)
                                     <?php $total = 0;
                                     $status = false; ?>
@@ -228,6 +229,7 @@
                                         @endif
                                     </tr>
                                     @endforeach
+                                    @endif
                                 </tbody>
                             </table>
 
