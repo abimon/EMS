@@ -218,9 +218,11 @@
                                         @endif
                                         @endforeach
                                         @endforeach
-                                        @if($status == false)
+                                        @if($status == false && $count>0 && $total>0)
                                         <td>{{$total}}</td>
+                                        
                                         <td>{{floor($total/$count)}}</td>
+
                                         @else
                                         <td class="bg-danger text-light">Missing Marks</td>
                                         @endif
