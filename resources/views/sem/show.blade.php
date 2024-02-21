@@ -201,7 +201,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if($res=true)
+                                    @if($res==true)
                                     @foreach($semStudents as $r=>$s)
                                     <?php $total = 0;
                                     $status = false; ?>
