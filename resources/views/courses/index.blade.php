@@ -10,7 +10,8 @@
     <div>
         <h2 class='text-center'>Courses</h2>
     </div>
-    <div class="d-flex justify-content-end">
+    @if($courses->count() < 0)
+    <div class="d-flex justify-content-end mb-2">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addcourse">+ Add Course</button>
 
         <!-- Modal -->
@@ -34,15 +35,15 @@
                 </div>
             </div>
         </div>
-
     </div>
+    @endif
     <table class="table table-responsive">
         <thead>
             <tr class="text-uppercase">
                 <th>#</th>
                 <th>Course</th>
                 <th>Department</th>
-
+                <th></th>
             </tr>
         </thead>
         <tbody>

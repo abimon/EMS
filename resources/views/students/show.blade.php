@@ -27,13 +27,16 @@
                         </li>
 
                         <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change">Update Student</button>
+                        </li>
+
+                        <li class="nav-item">
                             <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Records</button>
                         </li>
 
                         <li class="nav-item">
                             <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Results</button>
                         </li>
-
                     </ul>
                     <div class="tab-content pt-2">
 
@@ -51,6 +54,11 @@
                             </div>
 
                             <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Intake Year</div>
+                                <div class="col-lg-9 col-md-8">{{$student->intake}}</div>
+                            </div>
+
+                            <div class="row">
                                 <div class="col-lg-3 col-md-4 label">Identifier</div>
                                 <div class="col-lg-9 col-md-8">{{$student->identifier}}</div>
                             </div>
@@ -65,6 +73,7 @@
                                 @endforeach
                             </ul>
                         </div>
+
                         <div class="tab-pane fade" id="profile-settings">
                             <h2 class="card-title">Results</h2>
                             <table class="table table-responsive">
@@ -88,9 +97,34 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="tab-pane fade pt-3" id="profile-change-password">
-                            <h2 class="card-title">Other</h2>
-
+                        <div class="tab-pane fade pt-3" id="profile-change">
+                            <h2 class="card-title">Edit Student</h2>
+                            <form action="{{route('students.update',$student->id)}}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
+                                <div class="modal-body">
+                                    <div class="form-floating">
+                                        <input type="text" name="student_name" value="{{$student->student_name}}" id="" class="form-control mb-2">
+                                        <label for="">Student Name</label>
+                                    </div>
+                                    <div class="form-floating">
+                                        <input type="text" name="reg_no" value="{{$student->reg_no}}" id="" class="form-control mb-2">
+                                        <label for="">Student Reg. No.</label>
+                                    </div>
+                                    <div class="form-floating">
+                                        <input type="text" name="intake" value="{{$student->intake}}" id="" class="form-control mb-2">
+                                        <label for="">Student Intake Year</label>
+                                    </div>
+                                    <div class="form-floating">
+                                        <input type="text" name="identifier" value="{{$student->identifier}}" id="" class="form-control mb-2">
+                                        <label for="">Student Identifier</label>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="{{route('students.destroy',$student->id)}}"><button type="button" class="btn btn-danger">Delete</button></a>
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            </form>
                         </div>
                     </div><!-- End Bordered Tabs -->
                 </div>

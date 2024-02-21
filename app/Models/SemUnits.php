@@ -14,9 +14,9 @@ class SemUnits extends Model
         'year'
     ];
     public function sem(){
-        return $this->belongsTo(Sem::class, 'id', 'sem_id');
+        return $this->belongsTo(Sem::class, 'sem_id','id');
     }
     public function unit(){
-        return $this->belongsTo(Unit::class, 'id', 'unit_id');
+        return $this->belongsTo(Unit::class, 'unit_id','id');
     }
 }

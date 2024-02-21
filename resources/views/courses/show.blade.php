@@ -1,4 +1,4 @@
-@extends('layouts.tables')
+@extends('layouts.admin')
 @section('content')
 <div class="container bg-white">
     @if(session('success'))
@@ -11,9 +11,9 @@
         <ul class="nav  justify-content-between">
             @for($i=1;$i<=7;$i++) @if($course->units->where('yearG',$i)->count()>0)
                 <li class="nav-item accordion-item">
-                        <a class="nav-link" aria-current="page" href="#" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$i}}" aria-expanded="false" aria-controls="flush-collapse{{$i}}">
+                    <a class="nav-link" aria-current="page" href="#" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$i}}" aria-expanded="false" aria-controls="flush-collapse{{$i}}">
                         Year {{$i}}
-                        </a>
+                    </a>
                 </li>
                 @endif
                 @endfor
@@ -55,8 +55,54 @@
                         <ol class="ms-0">
                             <hr>
                             @foreach($course->units->where('yearG',$i)->where('sem',$k) as $unit)
-                            <div class="d-flex justify-content-between">
-                                <li>{{$unit->unit_code}} {{$unit->unit_title}}</li>
+                            <div >
+                                <li class="d-flex justify-content-between"><a href="#" data-bs-toggle="modal" data-bs-target="#editUnit{{$unit->id}}" style="text-decoration: none;">{{$unit->unit_code}} {{$unit->unit_title}}</a> <i>({{$unit->need}})</i></li>
+                                <!-- Modal -->
+                                <div class="modal fade" id="editUnit{{$unit->id}}" tabindex="-1" aria-labelledby="editUnit{{$unit->id}}Label" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="addcourseLabel">{{$unit->unit_code}} {{$unit->unit_title}}</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <form action="{{route('unit.update',$unit->id)}}" method="post" enctype="multipart/form-data">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="modal-body">
+                                                    <div class="form-floating">
+                                                        <input type="text" name="unit_title" value="{{$unit->unit_title}}" id="" class="form-control mb-2">
+                                                        <label for="">Unit Title</label>
+                                                    </div>
+                                                    <div class="form-floating">
+                                                        <input type="text" name="unit_code" value="{{$unit->unit_code}}" id="" class="form-control mb-2">
+                                                        <label for="">Unit Code</label>
+                                                    </div>
+                                                    <div class="form-floating">
+                                                        <input type="text" name="yearG" value="{{$unit->yearG}}" id="" class="form-control mb-2">
+                                                        <label for="">Unit Study Year</label>
+                                                    </div>
+                                                    <div class="form-floating">
+                                                        <input type="text" name="sem" value="{{$unit->sem}}" id="" class="form-control mb-2">
+                                                        <label for="">Unit Study Sem</label>
+                                                    </div>
+                                                    <div class="form-floating">
+                                                        <input type="text" name="category" value="{{$unit->category}}" id="" class="form-control mb-2">
+                                                        <label for="">Unit Study Provider</label>
+                                                    </div>
+                                                    <div class="form-floating">
+                                                        <input type="text" name="need" value="{{$unit->need}}" id="" class="form-control mb-2">
+                                                        <label for="">Unit Necessity</label>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <a href="{{route('unit.destroy',$unit->id)}}"><button type="button" class="btn btn-danger">Delete</button></a>
+                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <hr>
                             @endforeach

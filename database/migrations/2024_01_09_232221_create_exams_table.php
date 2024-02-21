@@ -16,9 +16,9 @@ return new class extends Migration
             $table->unsignedBigInteger('unit_id');
             $table->unsignedBigInteger('sem_id');
             $table->unsignedBigInteger('student_id');
-            $table->string('attempt');
-            $table->integer('CAT');
-            $table->integer('Exam');
+            $table->string('attempt')->nullable();
+            $table->string('CAT')->nullable();
+            $table->string('Exam')->nullable();
             $table->timestamps();
             $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
             $table->foreign('sem_id')->references('id')->on('sems')->onDelete('cascade');

@@ -11,6 +11,7 @@
         <h2 class='text-center'>{{$univ->uni_name}}</h2>
         <h2 class='text-center'>Departments</h2>
     </div>
+    @if(Auth()->user()->department_id==null)
     <div class="d-flex justify-content-end">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addDep">+ Add Department</button>
 
@@ -37,6 +38,7 @@
             </div>
         </div>
     </div>
+    @endif
     <table class="table table-responsive">
         <thead>
             <tr class="text-uppercase">
@@ -52,7 +54,7 @@
             @foreach($deps as $key=>$dep)
             <tr>
                 <td>{{$key+1}}</td>
-                <td><a href="{{route('department.show',$dep->dep_name)}}">{{$dep->dep_name}}</a></td>
+                <td><a href="{{route('course.index')}}">{{$dep->dep_name}}</a></td>
                 <td>{{$dep->faculty}}</td>
                 <td class="align-middle">
                     <!-- Button trigger modal -->

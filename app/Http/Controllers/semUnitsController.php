@@ -34,7 +34,7 @@ class semUnitsController extends Controller
                     $unit_id=(Unit::where('unit_code',$da[0])->first())->id;
                     SemUnits::create([
                         'sem_id'=>request()->sem_id,
-                        'unit_code' => $unit_id,
+                        'unit_id' => $unit_id,
                         'year' => $da[1],
                     ]);
                 }

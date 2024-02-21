@@ -39,6 +39,8 @@ class UnitController extends Controller
                         'unit_title' => $da[1],
                         'yearG' => $da[2],
                         'sem' => $da[3],
+                        'need' => $da[4],
+                        'category' => $da[5],
                     ]);
                 }
             }
@@ -57,13 +59,22 @@ class UnitController extends Controller
         //
     }
 
-    public function update(Request $request, Unit $unit)
+    public function update($id)
     {
-        //
+        Unit::where('id',$id)->update([
+            'unit_code' => request()->unit_code,
+            'unit_title' => request()->unit_title,
+            'yearG' => request()->yearG,
+            'sem' => request()->sem,
+            'need' => request()->need,
+            'category' => request()->category,
+        ]);
+        return redirect()->back();
     }
 
-    public function destroy(Unit $unit)
+    public function destroy($id)
     {
-        //
+        Unit::destroy($id);
+        return redirect()->back();
     }
 }

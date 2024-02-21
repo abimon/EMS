@@ -48,16 +48,16 @@ class semController extends Controller
      */
     public function show($id)
     {
-        // $students=SemStudents::where('sem_id',$id)->get();
-        // $units = SemUnits::where('sem_id',$id)->get();
         $sem = Sem::findOrFail($id);
-        // $results = Exam::where('sem_id',$id)->get();
-        return view('sem.show',compact('sem'))->with('units','sem','results','students');
+        $exams = Exam::where('sem_id',$id)->get();
+        $semStudents=SemStudents::where('sem_id',$id)->get();
+        $uns = SemUnits::where('sem_id',$id)->get();
+        return view('sem.show',compact('sem','exams','uns','semStudents'))->with('units','sem','results','students','sem','semUnit','student','unit');
     }
 
     public function edit(string $id)
     {
-        //
+
     }
 
     public function update($id)

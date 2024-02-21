@@ -10,6 +10,6 @@ class Pass extends Model
     use HasFactory;
     protected $fillable = [
         'exam_id',
-        'unit_code'
+        'student_id'
     ];
 }

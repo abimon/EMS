@@ -40,7 +40,7 @@ class ExamController extends Controller
         $file = request()->file('file');
         if ($file) {
             $data = Excel::toCollection(new ExamImport, $file);
-            
+            // return $data;
             foreach ($data[0] as $da) {
                 if ($da[0] != null) {
                     $stude=Student::where('reg_no',$da[0])->orWhere('student_name',$da[1])->first();
@@ -60,7 +60,7 @@ class ExamController extends Controller
                         if($da[3]==null){
                             Sup::create([
                                 'exam_id'=>$exam->id,
-                                'unit_code'=>$exam->unit_id
+                                'student_id'=>$id
                             ]);
                             Stata::create([
                                 'student_id'=>$id,
@@ -71,7 +71,7 @@ class ExamController extends Controller
                         if($da[4]==null){
                             Sup::create([
                                 'exam_id'=>$exam->id,
-                                'unit_code'=>$exam->unit_id
+                                'student_id'=>$id
                             ]);
                             Stata::create([
                                 'student_id'=>$id,
@@ -85,13 +85,13 @@ class ExamController extends Controller
                         if($g>40){
                             Pass::create([
                                 'exam_id'=>$exam->id,
-                                'unit_code'=>$exam->unit_id
+                                'student_id'=>$id
                             ]);
                         }
                         elseif($g>0){
                             Sup::create([
                                 'exam_id'=>$exam->id,
-                                'unit_code'=>$exam->unit_id
+                                'student_id'=>$id
                             ]);
                             Stata::create([
                                 'student_id'=>$id,
@@ -102,7 +102,7 @@ class ExamController extends Controller
                         else{
                             Special::create([
                                 'exam_id'=>$exam->id,
-                                'unit_code'=>$exam->unit_id
+                                'student_id'=>$id
                             ]);
                             Stata::create([
                                 'student_id'=>$id,
@@ -121,12 +121,8 @@ class ExamController extends Controller
 
     public function show($id)
     {
-        $items=Exam::where('unit_id',$id)->orderBy('reg_no','asc')->join('students','student_id','=','students.id')->select('exams.*','students.student_name','students.reg_no')->get();
-        $unit = Unit::where('id',$id)->first();
-        $pass = Pass::where('unit_code',$id)->get();
-        $specs = Special::where('unit_code',$id)->get();
-        $sups = Sup::where('unit_code',$id)->get();
-        return view('exams.index',compact('items','unit','pass','specs','sups'));
+        $exams = Exam::where('sem_id',$id)->get();
+        return view('exams.index',compact('exams'))->with('sem','semUnit','student');
     }
 
     public function edit($id,$year,$sem)

@@ -85,9 +85,15 @@ class StudentController extends Controller
         return view('students.index',compact('users','courses'));
     }
 
-    public function update(Request $request, Student $student)
+    public function update($id)
     {
-        //
+        Student::where('id',$id)->update([
+            "student_name"=>request()->student_name,
+            "reg_no"=>request()->reg_no,
+            "intake"=>request()->intake,
+            "identifier"=>request()->identifier
+        ]);
+        return redirect()->back();
     }
 
     public function destroy(Student $student)
