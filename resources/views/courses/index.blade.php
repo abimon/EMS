@@ -10,7 +10,7 @@
     <div>
         <h2 class='text-center'>Courses</h2>
     </div>
-    @if($courses->count() < 0)
+    @if($courses->count() < 1)
     <div class="d-flex justify-content-end mb-2">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addcourse">+ Add Course</button>
 
