@@ -186,13 +186,15 @@
                             </script>
                             <table class="table table-responsive table-striped-columns" id="myTable">
                                 <thead>
-                                    <?php $count = 0; $res=false;?>
+                                    <?php $count = 0;
+                                    $res = false; ?>
                                     <tr>
                                         <th>#</th>
                                         <th>Student</th>
                                         @foreach($uns as $unit)
                                         @if($unit->unit->exams->count()!=null)
-                                        <?php $count+=1;$res = true?>
+                                        <?php $count += 1;
+                                        $res = true ?>
                                         <th>{{$unit->unit->unit_code}}</th>
                                         @endif
                                         @endforeach
@@ -207,7 +209,8 @@
                                     $status = false; ?>
                                     <tr>
                                         <td>{{$r+1}}</td>
-                                        <td>{{$s->student->student_name}} <br> {{$s->student->reg_no}}</td>
+                                        <td><a href="{{route('students.show',$s->student->id)}}" style='text-decoration:none; color:black;'>{{$s->student->student_name}} <br> {{$s->student->reg_no}}</a></td>
+
                                         @foreach($uns as $k=>$unit)
                                         @foreach(($unit->unit->exams->where('student_id',$s->id)) as $ex)
                                         @if(($ex->CAT!=null) && ($ex->Exam!=null))
@@ -217,15 +220,17 @@
                                         <?php $status = true; ?>
                                         <td class="{{($ex->CAT==null && $ex->Exam==null)?'bg-danger':(($ex->CAT==null)?'bg-secondary':'bg-warning')}}">INCOMPLETE</td>
                                         @endif
+
                                         @endforeach
                                         @endforeach
                                         @if($status == false && $count>0 && $total>0)
                                         <td>{{$total}}</td>
-                                        
+
                                         <td>{{floor($total/$count)}}</td>
 
                                         @else
                                         <td class="bg-danger text-light">Missing Marks</td>
+                                        <td>---</td>
                                         @endif
                                     </tr>
                                     @endforeach
@@ -241,4 +246,5 @@
     </div>
 </div>
 </div>
+
 @endsection

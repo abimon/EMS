@@ -77,7 +77,7 @@
             <tr>
                 <td>{{$key+1}}</td>
                 <td class="text-uppercase"><a href="{{route('students.show',$user->id)}}" style='text-decoration:none; color:black;' type="button">{{$user->student_name}}</a></td>
-                
+
                 <td class="text-uppercase">{{$user->reg_no}}</td>
                 <td>{{$user->intake}}</td>
                 <td>{{$user->identifier}}</td>

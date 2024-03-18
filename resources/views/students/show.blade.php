@@ -80,19 +80,45 @@
                                 <thead>
                                     <th>Unit Code</th>
                                     <th>Unit Name</th>
-                                    <th>Score</th>
+                                    <th>CAT</th>
+                                    <th>Exam</th>
                                 </thead>
                                 <tbody>
                                     @foreach($exams as $exam)
                                     <tr>
-                                        <td>{{$exam->unit_code}}</td>
+                                        <td data-bs-toggle="modal" type='button' data-bs-target="#exam{{$exam->id}}">{{$exam->unit_code}}</td>
                                         <td>{{$exam->unit_title}}</td>
-                                        @if($exam->CAT!=null && $exam->Exam!=null)
-                                        <td>{{($exam->CAT)+($exam->Exam)}}</td>
-                                        @else
-                                        <td>Missing {{($exam->CAT!=null && $exam->Exam!=null)?'':($exam->Exam!=null?'Exam':'CAT')}} Marks</td>
-                                        @endif
+                                        <td>{{$exam->CAT}}</td>
+                                        <td>{{$exam->Exam}}</td>
                                     </tr>
+                                    <div class="modal fade" id="exam{{$exam->id}}" tabindex="-1" aria-labelledby="addstuLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="addstuLabel">{{$exam->unit_title}}</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <form action="{{route('exams.update',$exam->id)}}" method="get" enctype="multipart/form-data">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <div class="modal-body">
+                                                        <div class="form-floating">
+                                                            <input type="text" name="CAT" placeholder=" " id="" class="form-control mb-2" value="{{$exam->CAT}}">
+                                                            <label for="">CAT</label>
+                                                        </div>
+                                                        <div class="form-floating">
+                                                            <input type="text" name="Exam" placeholder=" " id="" class="form-control mb-2" value="{{$exam->Exam}}">
+                                                            <label for="">Exam</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                     @endforeach
                                 </tbody>
                             </table>

@@ -132,9 +132,10 @@ class ExamController extends Controller
         return view('examcms',compact('students','units'))->with('exams');
     }
 
-    public function update(Request $request, Exam $exam)
+    public function update($id)
     {
-        //
+        Exam::where('id',$id)->update(['Exam'=>request()->Exam,'CAT'=>request()->CAT]);
+        return redirect()->back();
     }
 
     public function destroy(Exam $exam)

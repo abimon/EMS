@@ -1,4 +1,4 @@
-@extends('layouts.tables')
+@extends('layouts.admin')
 @section('content')
 <table class="table table-scroll table-info table-striped table-hover">
     <thead>
