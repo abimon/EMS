@@ -86,10 +86,13 @@
                         </li>
 
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="/logout">
+                            <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" aria-expanded="false">
                                 <i class="bi bi-box-arrow-right"></i>
                                 <span>Sign Out</span>
                             </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                         </li>
 
                     </ul><!-- End Profile Dropdown Items -->
@@ -133,8 +136,8 @@
                     <div class="">
                         <h2 class="accordion-header">
                             <div class="accordion-button collapsed nav-link bg-dark text-light" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen" aria-expanded="false" aria-controls="panelsStayOpen">
-                            <i class="bi bi-files"></i>
-                               <span> Courses</span>
+                                <i class="bi bi-files"></i>
+                                <span> Courses</span>
                             </div>
                         </h2>
                         <div id="panelsStayOpen" class="accordion-collapse collapse">
