@@ -19,10 +19,6 @@ class CourseController extends Controller
     {
         
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store()
     {
         Course::create([

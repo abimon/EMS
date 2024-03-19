@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Department;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -66,6 +67,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $dep = Department::where('dep_name',request()->department)->first();
+        if(!$dep){
+            $dep=Department::create([
+                'uni_id'=>$data['uni_id'],
+                'dep_name'=>request()->department,
+                'faculty'=>request()->faculty,
+            ]);
+        }
 
         return User::create([
             'name' => $data['name'],
@@ -73,7 +82,8 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'contact'=>$data['contact'],
             'isAllowed'=>false,
-            'uni_id'=>$data['uni_id']
+            'uni_id'=>$data['uni_id'],
+            'department_id'=>$dep->id
         ]);
     }
 }

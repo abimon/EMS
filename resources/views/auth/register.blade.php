@@ -71,6 +71,31 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
+                                <label for="faculty" class="col-md-3 col-form-label text-md-end">{{ __('Faculty') }}</label>
+
+                                <div class="col-md-9">
+                                    <input id="faculty" type="text" class="form-control @error('faculty') is-invalid @enderror" name="faculty" value="{{ old('faculty') }}" required autocomplete="faculty">
+
+                                    @error('faculty')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="email" class="col-md-3 col-form-label text-md-end">{{ __('Department') }}</label>
+                                <div class="col-md-9">
+                                    <input id="department" type="text" class="form-control @error('contact') is-invalid @enderror" name="department" value="{{ old('department') }}" required autocomplete="department">
+
+                                    @error('department')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="row mb-3">
                                 <label for="password" class="col-md-3 col-form-label text-md-end">{{ __('Password') }}</label>
 
                                 <div class="col-md-9">
