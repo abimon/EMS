@@ -209,7 +209,7 @@
                                     </thead>
                                     <tbody>
                                         @if($res==true)
-                                        @foreach($semStudents->where('year',$i) as $r=>$s)
+                                        @foreach($semStudents as $r=>$s)
                                         <?php $total = 0;
                                         $status = false; ?>
                                         <tr>
