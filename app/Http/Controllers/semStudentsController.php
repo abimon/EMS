@@ -59,8 +59,7 @@ class semStudentsController extends Controller
                     }
                     else{
                         array_push($notfound, $da[0]);
-                    }
-                    
+                    } 
                 }
             }
             if(count($notfound)<=0){

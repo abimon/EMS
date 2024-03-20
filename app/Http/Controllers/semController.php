@@ -10,29 +10,19 @@ use Illuminate\Http\Request;
 
 class semController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $sems = Sem::where('dep_id',Auth()->user()->department_id)->get();
         return view('sem.index',compact('sems'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        // return request()->from;
         Sem::create([
             'dep_id'=>Auth()->user()->department_id,
             'timelines'=>(request()->from).'-'.(request()->to),
@@ -43,9 +33,6 @@ class semController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show($id)
     {
         $sem = Sem::findOrFail($id);
@@ -63,7 +50,6 @@ class semController extends Controller
     public function update($id)
     {
         $sem=Sem::findOrFail($id);
-        // return $sem;
         if($sem->status==0){
             $status = 1;
         }

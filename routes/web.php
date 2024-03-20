@@ -9,11 +9,7 @@ use App\Http\Controllers\semUnitsController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
-use App\Models\Course;
 use App\Models\Department;
-use App\Models\Exam;
-use App\Models\Student;
-use App\Models\Unit;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +17,7 @@ Route::get('/', function () {
     return view('home');
 });
 Route::get('/home',function(){return redirect('/');} );
+ROute::get('/SenateDoc/{y}/{s}',[ExamController::class,'SenateDoc']);
 Route::middleware('auth','XSS')->group(function(){
     Route::resources([
         'exams'=>ExamController::class,

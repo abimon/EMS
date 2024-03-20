@@ -148,18 +148,24 @@
             <div class="accordion-body">
                 <div class="accordion accordion-flush" id="accordionFlushExampleB">
                     <ul class="nav ms-auto me-auto">
-                        @for($i=1;$i<=7;$i++) <li class="nav-item accordion-item">
+                        @for($i=1;$i<=7;$i++)
+                        @if($sem->units->where('year',$i)->count()>0)
+                         <li class="nav-item accordion-item">
                             <a class="nav-link" aria-current="page" href="#" data-bs-toggle="collapse" data-bs-target="#flush-collapseResults{{$i}}" aria-expanded="false" aria-controls="flush-collapseResults{{$i}}">
                                 Year {{$i}}
                             </a>
                             </li>
+                            @endif
                             @endfor
                     </ul>
-                    @for($i=1;$i<=7;$i++) <div id="flush-collapseResults{{$i}}" class="accordion-collapse collapse {{$i==1?'show':''}}" data-bs-parent="#accordionFlushExampleB">
+                    @for($i=1;$i<=7;$i++) 
+                    @if($sem->units->where('year',$i)->count()>0)
+                    <div id="flush-collapseResults{{$i}}" class="accordion-collapse collapse {{$i==1?'show':''}}" data-bs-parent="#accordionFlushExampleB">
                         <div class="accordion-body">
                             <h2 class="text-center  text-capitalize">Results for Year {{$i}}</h2>
                             <div class="d-flex justify-content-between">
                                 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search by Name or Reg. No..." class="m-2 form-control w-50">
+                                <a href="/SenateDoc/{{$i}}/{{$sem->id}}"><button type="button" class="btn btn-secondary"><i class="fa fa-print"></i>Senate Doc</button></a>
                             </div>
                             <script>
                                 function myFunction() {
@@ -240,6 +246,7 @@
 
                         </div>
                 </div>
+                @endif
                 @endfor
             </div>
         </div>
