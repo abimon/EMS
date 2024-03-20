@@ -157,7 +157,8 @@
                             @endif
                             @endfor
                     </ul>
-                    @for($i=1;$i<=7;$i++) @if($sem->units->where('year',$i)->count()>0)
+                    @for($i=1;$i<=7;$i++) 
+                    @if($sem->units->where('year',$i)->count()>0)
                         <div id="flush-collapseResults{{$i}}" class="accordion-collapse collapse {{$i==1?'show':''}}" data-bs-parent="#accordionFlushExampleC">
                             <div class="accordion-body">
                                 <h2 class="text-center  text-capitalize">Results for Year {{$i}}</h2>
@@ -195,7 +196,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Student</th>
-                                            @foreach($uns as $unit)
+                                            @foreach($uns->where('year',$i) as $unit)
                                             @if($unit->unit->exams->count()!=null)
                                             <?php $count += 1;
                                             $res = true ?>
@@ -208,7 +209,7 @@
                                     </thead>
                                     <tbody>
                                         @if($res==true)
-                                        @foreach($semStudents as $r=>$s)
+                                        @foreach($semStudents->where('year',$i) as $r=>$s)
                                         <?php $total = 0;
                                         $status = false; ?>
                                         <tr>
@@ -244,8 +245,8 @@
 
                             </div>
                         </div>
-                        @endif
-                        @endfor
+                    @endif
+                    @endfor
                 </div>
             </div>
         </div>
