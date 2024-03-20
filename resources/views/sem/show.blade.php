@@ -214,7 +214,7 @@
                                         $status = false; ?>
                                         <tr>
                                             <td>{{$r+1}}</td>
-                                            <td><a href="{{route('students.show',$s->student->id)}}" style='text-decoration:none; color:black;'>{{$s->student->student_name}} <br> {{$s->student->reg_no}} @if($s->year != $i) <b>{{RA}}</b> @endif</a></td>
+                                            <td><a href="{{route('students.show',$s->student->id)}}" style='text-decoration:none; color:black;'>{{$s->student->student_name}} <br> {{$s->student->reg_no}} @if($s->year != $i) <b>RA</b> @endif</a></td>
 
                                             @foreach($uns as $k=>$unit)
                                             @foreach(($unit->unit->exams->where('student_id',$s->id)) as $ex)
