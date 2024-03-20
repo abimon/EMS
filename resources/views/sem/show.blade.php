@@ -146,112 +146,110 @@
         </div>
         <div id="flush-collapseResults" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
             <div class="accordion-body">
-                <div class="accordion accordion-flush" id="accordionFlushExampleB">
+                <div class="accordion accordion-flush" id="accordionFlushExampleC">
                     <ul class="nav ms-auto me-auto">
-                        @for($i=1;$i<=7;$i++)
-                        @if($sem->units->where('year',$i)->count()>0)
-                         <li class="nav-item accordion-item">
-                            <a class="nav-link" aria-current="page" href="#" data-bs-toggle="collapse" data-bs-target="#flush-collapseResults{{$i}}" aria-expanded="false" aria-controls="flush-collapseResults{{$i}}">
-                                Year {{$i}}
-                            </a>
+                        @for($i=1;$i<=7;$i++) @if($sem->units->where('year',$i)->count()>0)
+                            <li class="nav-item accordion-item">
+                                <a class="nav-link" aria-current="page" href="#" data-bs-toggle="collapse" data-bs-target="#flush-collapseResults{{$i}}" aria-expanded="false" aria-controls="flush-collapseResults{{$i}}">
+                                    Year {{$i}}
+                                </a>
                             </li>
                             @endif
                             @endfor
                     </ul>
-                    @for($i=1;$i<=7;$i++) 
-                    @if($sem->units->where('year',$i)->count()>0)
-                    <div id="flush-collapseResults{{$i}}" class="accordion-collapse collapse {{$i==1?'show':''}}" data-bs-parent="#accordionFlushExampleB">
-                        <div class="accordion-body">
-                            <h2 class="text-center  text-capitalize">Results for Year {{$i}}</h2>
-                            <div class="d-flex justify-content-between">
-                                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search by Name or Reg. No..." class="m-2 form-control w-50">
-                                <a href="/SenateDoc/{{$i}}/{{$sem->id}}"><button type="button" class="btn btn-secondary"><i class="fa fa-print"></i>Senate Doc</button></a>
-                            </div>
-                            <script>
-                                function myFunction() {
-                                    // Declare variables
-                                    var input, filter, table, tr, td, i, txtValue;
-                                    input = document.getElementById("myInput");
-                                    filter = input.value.toUpperCase();
-                                    table = document.getElementById("myTable");
-                                    tr = table.getElementsByTagName("tr");
+                    @for($i=1;$i<=7;$i++) @if($sem->units->where('year',$i)->count()>0)
+                        <div id="flush-collapseResults{{$i}}" class="accordion-collapse collapse {{$i==1?'show':''}}" data-bs-parent="#accordionFlushExampleC">
+                            <div class="accordion-body">
+                                <h2 class="text-center  text-capitalize">Results for Year {{$i}}</h2>
+                                <div class="d-flex justify-content-between">
+                                    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search by Name or Reg. No..." class="m-2 form-control w-50">
+                                    <a href="/SenateDoc/{{$i}}/{{$sem->id}}"><button type="button" class="btn btn-secondary"><i class="fa fa-print"></i>Senate Doc</button></a>
+                                </div>
+                                <script>
+                                    function myFunction() {
+                                        // Declare variables
+                                        var input, filter, table, tr, td, i, txtValue;
+                                        input = document.getElementById("myInput");
+                                        filter = input.value.toUpperCase();
+                                        table = document.getElementById("myTable");
+                                        tr = table.getElementsByTagName("tr");
 
-                                    // Loop through all table rows, and hide those who don't match the search query
-                                    for (i = 0; i < tr.length; i++) {
-                                        td = tr[i].getElementsByTagName("td")[1];
-                                        if (td) {
-                                            txtValue = td.textContent || td.innerText;
-                                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                                                tr[i].style.display = "";
-                                            } else {
-                                                tr[i].style.display = "none";
+                                        // Loop through all table rows, and hide those who don't match the search query
+                                        for (i = 0; i < tr.length; i++) {
+                                            td = tr[i].getElementsByTagName("td")[1];
+                                            if (td) {
+                                                txtValue = td.textContent || td.innerText;
+                                                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                                    tr[i].style.display = "";
+                                                } else {
+                                                    tr[i].style.display = "none";
+                                                }
                                             }
                                         }
                                     }
-                                }
-                            </script>
-                            <table class="table table-responsive table-striped-columns" id="myTable">
-                                <thead>
-                                    <?php $count = 0;
-                                    $res = false; ?>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Student</th>
-                                        @foreach($uns as $unit)
-                                        @if($unit->unit->exams->count()!=null)
-                                        <?php $count += 1;
-                                        $res = true ?>
-                                        <th>{{$unit->unit->unit_code}}</th>
-                                        @endif
+                                </script>
+                                <table class="table table-responsive table-striped-columns" id="myTable">
+                                    <thead>
+                                        <?php $count = 0;
+                                        $res = false; ?>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Student</th>
+                                            @foreach($uns as $unit)
+                                            @if($unit->unit->exams->count()!=null)
+                                            <?php $count += 1;
+                                            $res = true ?>
+                                            <th>{{$unit->unit->unit_code}}</th>
+                                            @endif
+                                            @endforeach
+                                            <th>Total</th>
+                                            <th>Average</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if($res==true)
+                                        @foreach($semStudents as $r=>$s)
+                                        <?php $total = 0;
+                                        $status = false; ?>
+                                        <tr>
+                                            <td>{{$r+1}}</td>
+                                            <td><a href="{{route('students.show',$s->student->id)}}" style='text-decoration:none; color:black;'>{{$s->student->student_name}} <br> {{$s->student->reg_no}}</a></td>
+
+                                            @foreach($uns as $k=>$unit)
+                                            @foreach(($unit->unit->exams->where('student_id',$s->id)) as $ex)
+                                            @if(($ex->CAT!=null) && ($ex->Exam!=null))
+                                            <?php $total += ($ex->CAT) + ($ex->Exam); ?>
+                                            <td>{{($ex->CAT)+($ex->Exam)}}</td>
+                                            @else
+                                            <?php $status = true; ?>
+                                            <td class="{{($ex->CAT==null && $ex->Exam==null)?'bg-danger':(($ex->CAT==null)?'bg-secondary':'bg-warning')}}">INCOMPLETE</td>
+                                            @endif
+
+                                            @endforeach
+                                            @endforeach
+                                            @if($status == false && $count>0 && $total>0)
+                                            <td>{{$total}}</td>
+
+                                            <td>{{floor($total/$count)}}</td>
+
+                                            @else
+                                            <td class="bg-danger text-light">Missing Marks</td>
+                                            <td>---</td>
+                                            @endif
+                                        </tr>
                                         @endforeach
-                                        <th>Total</th>
-                                        <th>Average</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if($res==true)
-                                    @foreach($semStudents as $r=>$s)
-                                    <?php $total = 0;
-                                    $status = false; ?>
-                                    <tr>
-                                        <td>{{$r+1}}</td>
-                                        <td><a href="{{route('students.show',$s->student->id)}}" style='text-decoration:none; color:black;'>{{$s->student->student_name}} <br> {{$s->student->reg_no}}</a></td>
-
-                                        @foreach($uns as $k=>$unit)
-                                        @foreach(($unit->unit->exams->where('student_id',$s->id)) as $ex)
-                                        @if(($ex->CAT!=null) && ($ex->Exam!=null))
-                                        <?php $total += ($ex->CAT) + ($ex->Exam); ?>
-                                        <td>{{($ex->CAT)+($ex->Exam)}}</td>
-                                        @else
-                                        <?php $status = true; ?>
-                                        <td class="{{($ex->CAT==null && $ex->Exam==null)?'bg-danger':(($ex->CAT==null)?'bg-secondary':'bg-warning')}}">INCOMPLETE</td>
                                         @endif
+                                    </tbody>
+                                </table>
 
-                                        @endforeach
-                                        @endforeach
-                                        @if($status == false && $count>0 && $total>0)
-                                        <td>{{$total}}</td>
-
-                                        <td>{{floor($total/$count)}}</td>
-
-                                        @else
-                                        <td class="bg-danger text-light">Missing Marks</td>
-                                        <td>---</td>
-                                        @endif
-                                    </tr>
-                                    @endforeach
-                                    @endif
-                                </tbody>
-                            </table>
-
+                            </div>
                         </div>
+                        @endif
+                        @endfor
                 </div>
-                @endif
-                @endfor
             </div>
         </div>
     </div>
-</div>
 </div>
 
 @endsection
